@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "servidor para a newsletter a tempestade que sou",
+  "main": "index.js",
+  "scripts": {
+    "test": "not fount",
+    "dev": "nodemon --watch 'src/' --exec 'ts-node src/main.ts' -e ts"
+  },
+  "keywords": [
+    "newsletter"
+  ],
+  "author": "José Guilherme",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/nodemailer": "^6.4.6"
+  }
+}
