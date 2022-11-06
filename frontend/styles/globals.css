@@ -8,8 +8,10 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+  
 
+}
+ 
 a {
   color: inherit;
   text-decoration: none;
@@ -17,14 +19,10 @@ a {
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} 
+/* var blue #0099F7
+  var yellow #FEC842
+*/
