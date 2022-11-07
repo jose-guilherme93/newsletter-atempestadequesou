@@ -2,24 +2,25 @@
 
 import nodemailer from 'nodemailer'
 
-export default function handler() {
+export default function handler(req: any, res: any) {
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.mailtrap.io",
-  port: 2525,
+  host: 'smtp.gmail.com',
+  port: 465,
+ secure: true, 
   auth: {
-    user: "17cf6e8189d6b7",
-    pass: "a35bd2ee747fc2"
-
-  },
+  user: process.env.EMAIL,
+  pass: process.env.PASSWORD
+ },
 });
 
-// send mail with defined transport object
 transporter.sendMail({
-  from: '"a tempestade que sou" <atempestadequesou@gmail.com>', // sender address
-  to: "jose-guilherme93@hotmail.com", // list of receivers
-  subject: "boas vindas a você!", // Subject line
-  text: "mensagem enviada com fetch", // plain text body
-  html: "<b>mensagem enviada com fetch do navegador</b>", // html body
-}).catch((error) => console.log(error))
+  from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
+  to: req.body.email,
+  subject:  `boas vindas, ${req.body.nome}!`,
+  text: `mensagem enviada com fetch para, ${req.body.nome}! `, 
+  html: `<b>mensagem enviada com fetch para ${req.body.nome}!</b>`, 
+}).then((response) => res.send(response))
+.then((response) => res.status(200))
+.catch((error) => console.log(error))
 }
