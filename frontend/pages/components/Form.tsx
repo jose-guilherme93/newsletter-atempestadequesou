@@ -19,8 +19,8 @@ export default function Form() {
                 email: data.email
                 
             })
-           
         } )
+        setTimeout(()=>{setIsSend(false)}, (2000))
         
     }
     
