@@ -9,7 +9,7 @@ export default function Form() {
     const [isSend, setIsSend] = useState(false)
     const onSubmit = (data: any) => {
         setIsSend(true)
-        fetch('./api/mail', {
+        fetch('./api/server/automatic-mail', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,6 +20,7 @@ export default function Form() {
                 
             })
         } )
+
         setTimeout(()=>{setIsSend(false)}, (2000))
         
     }
