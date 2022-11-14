@@ -23,6 +23,7 @@ var transporter = nodemailer.createTransport({
   pass: process.env.PASSWORD
 }});
 
+
 transporter.sendMail({
   from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
   to: req.body.email,
@@ -32,6 +33,7 @@ transporter.sendMail({
   
   h1, p {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 500;
   }
 
 </style>
@@ -40,7 +42,7 @@ transporter.sendMail({
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tenetur adipisci quis quod, architecto quasi itaque vero dolore similique eius corporis, pariatur perferendis quas eaque cupiditate repellendus consequatur hic voluptatibus?</p>
 </body> `
 
-}).then(() => res.status(200))
+}).then(() => res.status(200).send())
 
 .catch((error) => console.log(error))
 }

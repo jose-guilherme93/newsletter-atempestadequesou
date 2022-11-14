@@ -1,5 +1,6 @@
-import Form from "./components/Form"
+import React from "react"
 
+import Form from "./components/Form"
 
 export default function Home() {
  
