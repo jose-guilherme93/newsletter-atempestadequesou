@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 
 import {  IoIosArrowDown } from 'react-icons/io'
 
+
 interface UserFormData {
     nome: string
     email: string
@@ -38,6 +39,7 @@ export default function Form() {
     return (
        <div className="h-full w-full bg-blue-700">
             <form className=" bg-blue w-full h-full flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
+
                 <Image
                 priority
                 src="/logo.jpg" 
@@ -46,6 +48,7 @@ export default function Form() {
                 alt="logo"
                 className="mb-8 rounded-full"
                 />
+                
                 
                 <h1 className="p-3 rounded-lg max-w-full ml-4 mr-4 text-center text-2xl bg-zinc-200 border-2 hover:border-yellow-400 shadow-sm shadow-zinc-700 text-zinc-700 font-mono">meus pensamentos, minhas histórias, minhas sensações. na sua caixa de email. </h1> <br />
 
