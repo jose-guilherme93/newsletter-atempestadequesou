@@ -4,24 +4,24 @@ import nodemailer from 'nodemailer'
 
 export default function handler(req: any, res: any) {
 
-// let transporter = nodemailer.createTransport({
+var transporter = nodemailer.createTransport({
+  host: 'smtp.mailtrap.io',
+  port: 2525,
+ 
+  auth: {
+    user: "17cf6e8189d6b7",
+    pass: "a35bd2ee747fc2"
+ },
+});
+
+// var transporter = nodemailer.createTransport({
 //   host: 'smtp.gmail.com',
 //   port: 465,
-//  secure: true, 
+//   secure: true, 
 //   auth: {
 //   user: process.env.EMAIL,
 //   pass: process.env.PASSWORD
-//  },
-// });
-
-var transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, 
-  auth: {
-  user: process.env.EMAIL,
-  pass: process.env.PASSWORD
-}});
+// }});
 
 
 transporter.sendMail({

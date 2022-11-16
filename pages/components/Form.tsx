@@ -2,14 +2,22 @@ import React, {useState} from 'react'
 
 import Image from "next/image"
 
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 import {  IoIosArrowDown } from 'react-icons/io'
 
+interface UserFormData {
+    nome: string
+    email: string
+    handleSubmit: () => {}
+}
+
 export default function Form() {
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm<UserFormData>()
+
     const [isSend, setIsSend] = useState(false)
-    const onSubmit = (data: any) => {
+
+    const onSubmit: SubmitHandler<UserFormData> = (data) => {
         setIsSend(true)
         fetch('./api/server/automatic-mail', {
             method: 'POST',
@@ -48,7 +56,7 @@ export default function Form() {
                 type="text"
                 placeholder="seu nome"
                 {...register("nome", { required: true })}  />
-                {errors.exampleRequired && <span className="text-white font-mono">ei, não esqueça seu nome</span>}
+                {errors.nome && <span className="text-white font-mono">ei, não esqueça seu nome</span>}
                 
                 <label htmlFor="inputEmail" className="text-left w-4/5 text-white text-lg font-mono mb-2">seu email</label>
                 <input
@@ -57,12 +65,12 @@ export default function Form() {
                 className="w-4/5 border-transparent  focus:border-yellow-400 border-2 hover:border-yellow-400 rounded-lg text-zinc-500 shadow-sm shadow-zinc-700"
                 placeholder="moranguinho23@exemplo.com"
                 {...register("email", { required: true })} />
-                {/* errors will return when field validation fails  */}
-                {errors.exampleRequired && <span className="text-white font-mono">esse email está meio estranho...</span>}
+                
+                {errors.email && <span className="text-white font-mono">esse email está meio estranho...</span>}
 
-                <button className=" font-mono text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400  " type="submit">{isSend ? 'enviado!' : 'enviar'}</button>
+                <button className=" font-mono text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" type="submit">{isSend ? 'enviado!' : 'enviar'}</button>
             
-                <button disabled={isSend} onClick={() => document.location.href = "#secondScreen"} type="button" className=" md:hidden  opacity-40"> <IoIosArrowDown size={60}/></button>
+                <button disabled={isSend} onClick={() => document.location.href = "#secondScreen"} type="button" className=" md:hidden disabled:opacity-75  opacity-40"> <IoIosArrowDown size={60}/></button>
             </form>
        </div>
     )
