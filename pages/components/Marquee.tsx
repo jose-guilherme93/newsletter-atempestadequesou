@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AiOutlineLink from 'react-icons'
+
 import Marquee from "react-fast-marquee";
 
 export default function MarqueeHorizontal() {
@@ -51,7 +51,7 @@ export default function MarqueeHorizontal() {
 
                <Marquee key={index} gradient={false} speed={Math.random() + 7}>
                     <Link
-                        className="h-auto w-fit text-center    bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
+                        className="h-auto w-fit text-center bg-transparent bg-opacity-80 shadow-sm shadow-yellow-500 drop-shadow-md bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
                         target='_blank' 
                         href={posts.link} 
                         key=''
