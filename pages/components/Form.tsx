@@ -48,8 +48,7 @@ export default function Form() {
                 alt="logo"
                 className="mb-8 rounded-full"
                 />
-                
-                
+ 
                 <h1 className="p-3 rounded-lg max-w-full ml-4 mr-4 text-center text-2xl bg-zinc-200 border-2 hover:border-yellow-400 shadow-sm shadow-zinc-700 text-zinc-700 font-mono">meus pensamentos, minhas histórias, minhas sensações. na sua caixa de email. </h1> <br />
 
                 <label className="text-left w-4/5 text-white text-lg font-mono mb-2" htmlFor="inputName"> seu nome mais bonito</label>
@@ -71,8 +70,9 @@ export default function Form() {
                 
                 {errors.email && <span className="text-white font-mono">esse email está meio estranho...</span>}
 
-                <button className=" font-mono text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" type="submit">{isSend ? 'enviado!' : 'enviar'}</button>
-            
+                <button className=" font-mono text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" type="submit">enviar</button>
+                
+                {isSend && 'enviando...'}
                 <button disabled={isSend} onClick={() => document.location.href = "#secondScreen"} type="button" className=" md:hidden disabled:opacity-75  opacity-40"> <IoIosArrowDown size={60}/></button>
             </form>
        </div>

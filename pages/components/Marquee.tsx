@@ -1,14 +1,68 @@
+import Link from "next/link";
+import AiOutlineLink from 'react-icons'
 import Marquee from "react-fast-marquee";
 
 export default function MarqueeHorizontal() {
-    const message = 'exemplo de mensagem'
+    interface PostsProps {
+        title: string
+        link: string
+    }
+
+
+    const posts: PostsProps[] = [
+        {
+            title: 'O meu infinito é também uma tentativa',
+            link: 'https://www.instagram.com/p/Ck_dvIGur7A/',
+        },
+        {
+            title: 'A ancestralidade de pessoas pretas é uma conexão tão forte, que só sabe quem sente',
+            link: 'https://www.instagram.com/p/Ck6Rwwfuf9S/',
+        },
+        {
+            title: 'em todo universo',
+            link: 'https://www.instagram.com/p/Ckw2mnouiw7/',
+        },
+        {
+            title: 'sorrir pra não chorar',
+            link: 'https://www.instagram.com/p/CkN-hK2urRk/',
+        },
+        {
+            title: "you don't have to be sorry for leaving and growing up",
+            link: 'https://www.instagram.com/p/CkE4JsNu1PN/',
+        },
+        {
+            title: 'levanto minha voz com o tom de milhares que vieram antes de mim',
+            link: 'https://www.instagram.com/p/CkE4JsNu1PN/'
+        },
+        {
+            title: 'ponto de partida',
+            link: 'https://www.instagram.com/p/CjQimF6OELo/'
+        },
+        {
+            title: 'vai viver, D',
+            link: 'https://www.instagram.com/p/CjB-gv4Opd5/',
+
+        }
+    ]
+
     return (
-        <div className="w-full">
-            <Marquee gradient={false}  speed={10}>
-                <div className="rounded bg-zinc-50">
-                    <p className="p-2 text-2xl "> "{message}"  </p>
-                </div>
-            </Marquee>
-        </div>
+        <>  
+            {posts.map((posts, index)=> (
+
+               <Marquee key={index} gradient={false} speed={Math.random() + 7}>
+                    <Link
+                        className="h-auto w-fit text-center    bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
+                        target='_blank' 
+                        href={posts.link} 
+                        key=''
+                        >
+                        &quot;{posts.title}&quot;
+                         
+                    </Link>
+                </Marquee>
+            ))}
+                
+            
+        </>
     )
 }
