@@ -9,7 +9,9 @@ depois utilize o comando
 abra seu navegador e digite http://localhost:3000/.
 
 ### preview desktop:
-![image](https://user-images.githubusercontent.com/81981887/201775790-8b68db32-9610-4a02-af81-fb9f25da69eb.png)
+![image](https://user-images.githubusercontent.com/81981887/202463158-33949239-b9c6-4a22-a888-ed57969bcb5f.png)
+
 ### preview mobile:
 ![image](https://user-images.githubusercontent.com/81981887/201776101-50247574-f9e5-4d14-8d39-fd34e49f9610.png)
-![image](https://user-images.githubusercontent.com/81981887/201776187-3c4090e6-e8dd-4661-a041-1a7f83e74b07.png)
+![image](https://user-images.githubusercontent.com/81981887/202463787-57ac2be0-3e35-4aca-aafc-8f532ba3f289.png)
+
