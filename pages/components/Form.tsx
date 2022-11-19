@@ -37,8 +37,8 @@ export default function Form() {
     }
     
     return (
-       <div className="h-full w-full bg-blue-700">
-            <form className=" bg-blue w-full h-full flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
+       <div className="h-screen w-full mb-auto mt-auto ">
+            <form className="bg-blue w-full h-full flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
 
                 <Image
                 priority
@@ -54,26 +54,26 @@ export default function Form() {
                 <label className="text-left w-4/5 text-white text-lg font-mono mb-2" htmlFor="inputName"> seu nome mais bonito</label>
                 <input
                 id="inputName"
-                className=" w-4/5  focus border-2 border-transparent focus:border-yellow-400 hover:border-yellow-400 rounded-lg mx-4 mb-4 text-zinc-500 shadow-sm  shadow-zinc-700" 
+                className=" w-4/5  focus border-2 border-transparent focus:border-yellow-400 hover:border-yellow-400 rounded-lg mx-4 mb-4 text-zinc-500 shadow-sm  shadow-zinc-500" 
                 type="text"
                 placeholder="seu nome"
                 {...register("nome", { required: true })}  />
-                {errors.nome && <span className="text-white font-mono">ei, não esqueça seu nome</span>}
+                {errors.nome && <span className="text-left w-4/5 text-white font-mono">ei, não esqueça seu nome</span>}
                 
                 <label htmlFor="inputEmail" className="text-left w-4/5 text-white text-lg font-mono mb-2">seu email</label>
                 <input
                 id="inputEmail"
                 type="email"
-                className="w-4/5 border-transparent  focus:border-yellow-400 border-2 hover:border-yellow-400 rounded-lg text-zinc-500 shadow-sm shadow-zinc-700"
+                className="w-4/5 border-transparent  focus:border-yellow-400 border-2 hover:border-yellow-400 rounded-lg text-zinc-500 shadow-sm shadow-zinc-500"
                 placeholder="moranguinho23@exemplo.com"
                 {...register("email", { required: true })} />
                 
-                {errors.email && <span className="text-white font-mono">esse email está meio estranho...</span>}
+                {errors.email && <span className="text-left w-4/5 text-white font-mono">esse email está meio estranho...</span>}
 
-                <button className=" font-mono text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" type="submit">enviar</button>
+                <button disabled={isSend} className="shadow-sm drop-shadow-sm shadow-zinc-400 disabled:opacity-40 font-mono text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" type="submit">enviar</button>
                 
                 {isSend && 'enviando...'}
-                <button disabled={isSend} onClick={() => document.location.href = "#secondScreen"} type="button" className=" md:hidden disabled:opacity-75  opacity-40"> <IoIosArrowDown size={60}/></button>
+                <button  onClick={() => document.location.href = "#secondScreen"} type="button" className=" md:hidden   opacity-40"> <IoIosArrowDown size={60}/></button>
             </form>
        </div>
     )

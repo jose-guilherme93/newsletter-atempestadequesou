@@ -1,16 +1,17 @@
 import React from "react"
 import MarqueeHorizontal from './components/Marquee'
-import Marquee from "react-fast-marquee"
+
 
 import Form from "./components/Form"
 
 export default function Home() {
  
   return (
-    <main className="block w-full h-screen sm:block md:flex ">
+    <main className=" w-full h-full sm:block md:flex bg-gradient-to-l from-yellow-300 to-blue-600 ">
+
       <Form />
 
-      <div id="secondScreen" className="w-screen h-screen mt-auto mb-auto justify-center bg-yellow-300">
+      <div id="secondScreen" className=" w-screen h-screen mt-auto mb-auto justify-center ">
       <MarqueeHorizontal />
       
       </div>

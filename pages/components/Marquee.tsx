@@ -7,8 +7,6 @@ export default function MarqueeHorizontal() {
         title: string
         link: string
     }
-
-
     const posts: PostsProps[] = [
         {
             title: 'O meu infinito é também uma tentativa',
@@ -41,28 +39,23 @@ export default function MarqueeHorizontal() {
         {
             title: 'vai viver, D',
             link: 'https://www.instagram.com/p/CjB-gv4Opd5/',
-
         }
     ]
 
     return (
         <>  
             {posts.map((posts, index)=> (
-
                <Marquee key={index} gradient={false} speed={Math.random() + 7}>
                     <Link
-                        className="h-auto w-fit text-center bg-transparent bg-opacity-80 shadow-sm shadow-yellow-500 drop-shadow-md bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
+                        className="h-auto w-fit text-center bg-transparent bg-opacity-60 shadow-sm shadow-yellow-100 drop-shadow-md bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
                         target='_blank' 
                         href={posts.link} 
                         key=''
                         >
                         &quot;{posts.title}&quot;
-                         
                     </Link>
                 </Marquee>
             ))}
-                
-            
         </>
     )
 }
