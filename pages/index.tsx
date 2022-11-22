@@ -18,11 +18,11 @@ export default function Home() {
         <meta name="author" content="A tempestade que sou"/>
       </Head>
 
-    <main className=" w-full h-full sm:block md:flex bg-gradient-to-l from-yellow-300 to-blue-600 ">
+    <main className="w-screen md:flex bg-gradient-to-l from-yellow-300 to-blue-600 ">
 
       <Form />
 
-      <div id="secondScreen" className=" w-screen h-screen mt-auto mb-auto justify-center ">
+      <div id="secondScreen" className=" w-full h-full mt-auto mb-auto justify-center ">
       <MarqueeHorizontal />
       
       </div>

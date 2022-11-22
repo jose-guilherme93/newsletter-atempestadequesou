@@ -37,8 +37,8 @@ export default function Form() {
     }
     
     return (
-       <div className="h-screen w-full mb-auto mt-auto ">
-            <form className="bg-blue w-full h-full flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
+       <div className=" w-screen h-screen mb-auto mt-auto ">
+            <form className=" w-full h-full bg-blue flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmit)}>
 
                 <Image
                 priority

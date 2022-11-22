@@ -45,7 +45,7 @@ export default function MarqueeHorizontal() {
     return (
         <>  
             {posts.map((posts, index)=> (
-               <Marquee key={index} gradient={false} speed={Math.random() + 7}>
+               <Marquee key={index} gradient={false} speed={Math.random() + 9}>
                     <Link
                         className="h-auto w-fit text-center bg-transparent bg-opacity-60 shadow-sm shadow-yellow-100 drop-shadow-md bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
                         target='_blank' 
