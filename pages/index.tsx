@@ -22,8 +22,8 @@ export default function Home() {
 
       <Form />
 
-      <div id="secondScreen" className=" w-full h-full mt-auto mb-auto justify-center ">
-      <MarqueeHorizontal />
+      <div id="secondScreen" className=" w-screen h -screen mt-auto mb-auto">
+        <MarqueeHorizontal />
       
       </div>
       

@@ -1,58 +1,46 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from 'axios'
+
+
 
 import Marquee from "react-fast-marquee";
 
+interface PostsProps {
+    caption: string
+    media_url: string
+}
+
 export default function MarqueeHorizontal() {
-    interface PostsProps {
-        title: string
-        link: string
-    }
-    const posts: PostsProps[] = [
-        {
-            title: 'O meu infinito é também uma tentativa',
-            link: 'https://www.instagram.com/p/Ck_dvIGur7A/',
-        },
-        {
-            title: 'A ancestralidade de pessoas pretas é uma conexão tão forte, que só sabe quem sente',
-            link: 'https://www.instagram.com/p/Ck6Rwwfuf9S/',
-        },
-        {
-            title: 'em todo universo',
-            link: 'https://www.instagram.com/p/Ckw2mnouiw7/',
-        },
-        {
-            title: 'sorrir pra não chorar',
-            link: 'https://www.instagram.com/p/CkN-hK2urRk/',
-        },
-        {
-            title: "you don't have to be sorry for leaving and growing up",
-            link: 'https://www.instagram.com/p/CkE4JsNu1PN/',
-        },
-        {
-            title: 'levanto minha voz com o tom de milhares que vieram antes de mim',
-            link: 'https://www.instagram.com/p/CkE4JsNu1PN/'
-        },
-        {
-            title: 'ponto de partida',
-            link: 'https://www.instagram.com/p/CjQimF6OELo/'
-        },
-        {
-            title: 'vai viver, D',
-            link: 'https://www.instagram.com/p/CjB-gv4Opd5/',
+    const [posts, setPosts] = useState<PostsProps[]> ([])
+
+    useEffect(() => {
+
+        
+        
+        async function getAltImageInstagram() {
+            const token = process.env.NEXT_PUBLIC_INSTAGRAM_TOKEN
+            const fields = 'media_url, media_type, caption, picture'
+            const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}&caption={caption} `
+            
+            const {data} = await axios.get(url)
+            setPosts(data.data)
         }
-    ]
+        getAltImageInstagram()
+
+    }, [])
+    
 
     return (
         <>  
-            {posts.map((posts, index)=> (
-               <Marquee key={index} gradient={false} speed={Math.random() + 9}>
+            {posts.map((posts, index) => (
+               <Marquee key={index} gradient={false} speed={Math.random() + 13}>
                     <Link
-                        className="h-auto w-fit text-center bg-transparent bg-opacity-60 shadow-sm shadow-yellow-100 drop-shadow-md bg-white list-none m-4 rounded-lg font-semibold p-3 text-blue-600" 
+                        className="h-10 w-96 text-center mb-4 p-2  bg-transparent bg-opacity-60 shadow-sm shadow-yellow-100 drop-shadow-md bg-white list-none rounded-lg font-semibold items-center text-blue-600 whitespace-nowrap overflow-ellipsis overflow-hidden" 
                         target='_blank' 
-                        href={posts.link} 
-                        key=''
+                        href={posts.media_url}
                         >
-                        &quot;{posts.title}&quot;
+                        &quot;{posts.caption}&quot;
                     </Link>
                 </Marquee>
             ))}

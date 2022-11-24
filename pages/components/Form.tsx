@@ -46,10 +46,10 @@ export default function Form() {
                 width={100}
                 height={100}
                 alt="logo"
-                className="mb-8 rounded-full"
+                className=" mb-4 rounded-full"
                 />
  
-                <h1 className="p-3 rounded-lg max-w-full ml-4 mr-4 text-center text-2xl bg-zinc-200 border-2 hover:border-yellow-400 shadow-sm shadow-zinc-500 text-zinc-700 font-mono">meus pensamentos, minhas histórias, minhas sensações. na sua caixa de email. </h1> <br />
+                <h1 className="p-3 rounded-lg w-4/5  text-center text-2xl bg-zinc-200 border-2 hover:border-yellow-400 shadow-sm shadow-zinc-500 text-zinc-700 font-mono">meus pensamentos, minhas histórias, minhas sensações. na sua caixa de email. </h1> <br />
 
                 <label className="text-left w-4/5 text-white text-lg font-mono mb-2" htmlFor="inputName"> seu nome mais bonito</label>
                 <input
