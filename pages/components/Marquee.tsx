@@ -19,6 +19,7 @@ export default function MarqueeHorizontal() {
     useEffect(() => {
         setIsLoading(true)
         async function getAltImageInstagram() {
+            
             const token = process.env.NEXT_PUBLIC_INSTAGRAM_TOKEN
             const fields = 'media_url, media_type, caption, picture, permalink'
             const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}&caption={caption} `
