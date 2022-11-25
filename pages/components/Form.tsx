@@ -58,7 +58,7 @@ export default function Form() {
                 type="text"
                 placeholder="seu nome"
                 {...register("nome", { required: true })}  />
-                {errors.nome && <span className="text-left w-4/5 text-white font-mono">ei, não esqueça seu nome</span>}
+                {errors.nome && <span className="text-left w-4/5 text-white relative top-7 font-mono">ei, não esqueça seu nome</span>}
                 
                 <label htmlFor="inputEmail" className="text-left w-4/5 text-white text-lg font-mono mb-2">seu email</label>
                 <input

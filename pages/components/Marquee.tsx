@@ -17,14 +17,15 @@ export default function MarqueeHorizontal() {
     useEffect(() => {
 
         
-        
         async function getAltImageInstagram() {
+            
             const token = process.env.NEXT_PUBLIC_INSTAGRAM_TOKEN
             const fields = 'media_url, media_type, caption, picture'
             const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}&caption={caption} `
             
             const {data} = await axios.get(url)
-            setPosts(data.data)
+            data.ok ?  setPosts(data.data) :  console.log('erro na requisição')
+            
         }
         getAltImageInstagram()
 
