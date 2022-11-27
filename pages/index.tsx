@@ -14,7 +14,7 @@ export default function Home() {
         <title>A tempestade que sou</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="description" content="Página de captura de email para eventuais atualizações do instagram @atempestadequesou "/>
+        <meta name="description" content="Página de captura de email para eventuais atualizações do instagram @atempestadequesou"/>
         <meta name="keywords" content="newsletter, landing page"/>
         <meta name="author" content="A tempestade que sou"/>
       </Head>
