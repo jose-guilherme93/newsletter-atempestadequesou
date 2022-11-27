@@ -3,6 +3,6 @@ import { TailSpin } from 'react-loader-spinner'
 export default function Loading() {
 
     return (
-        <TailSpin />
+        <TailSpin color="#0000ff" />
     )    
 } 
