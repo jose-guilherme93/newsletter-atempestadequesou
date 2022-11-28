@@ -17,6 +17,8 @@ interface PostsProps {
 export default function MarqueeHorizontal() {
     const [posts, setPosts] = useState<PostsProps[]> ([])
     const [isLoading, setIsLoading] = useState(false)
+
+    
     useEffect(() => {
         setIsLoading(true)
         async function getAltImageInstagram() {
@@ -43,7 +45,7 @@ export default function MarqueeHorizontal() {
             {
             isLoading ?
 
-            <div className="w-full flex flex-col items-center justify-center  h-full">
+            <div className="w-full flex flex-col items-center justify-center h-full">
                 <Loading /> 
             </div>
 
@@ -51,13 +53,13 @@ export default function MarqueeHorizontal() {
                 (
                     <div className="h-screen overflow-hidden "> 
                         {posts.map((posts, index) => (
-                            <Marquee key={index} gradient={false} speed={Math.random() + 19}>
+                            <Marquee key={index} gradient={false} speed={Math.random() + 21.3534}>
                                     <Link
                                         className="h-auto w-96 mb-10 text-center p-3  bg-transparent bg-opacity-60 shadow-sm shadow-yellow-100 drop-shadow-md bg-white list-none rounded-lg font-semibold items-center text-blue-600  overflow-ellipsis overflow-hidden whitespace-nowrap " 
                                         target='_blank'
                                         href={posts.permalink}
                                         >
-                                        &quot;{posts.caption}&quot;
+                                    {posts.caption}  
                                     </Link>
                             </Marquee>
                         ))}
