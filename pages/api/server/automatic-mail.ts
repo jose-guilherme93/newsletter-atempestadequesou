@@ -33,7 +33,7 @@ transporter.sendMail({
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tenetur adipisci quis quod, architecto quasi itaque vero dolore similique eius corporis, pariatur perferendis quas eaque cupiditate repellendus consequatur hic voluptatibus?</p>
 </body> `
 
-}).then(() => res.status(200))
+}).then(() => res.status(201))
 
 .catch((error) => console.log(error))
 }

@@ -12,6 +12,7 @@
     "axios": "^1.2.0",
     "dotenv": "^16.0.3",
     "next": "13.0.0",
+    "ngrok": "^4.3.3",
     "nodemailer": "^6.8.0",
     "puppeteer": "^19.2.2",
     "react": "18.2.0",
