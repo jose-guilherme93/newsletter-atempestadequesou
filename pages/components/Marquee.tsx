@@ -8,11 +8,7 @@ import Marquee from "react-fast-marquee"
 
 import Loading from "./Loading"
 
-interface PostsProps {
-    caption:   string
-    media_url: string
-    permalink: string
-}
+import { PostsProps } from "../api/DTO"
 
 export default function MarqueeHorizontal() {
     const [posts, setPosts] = useState<PostsProps[]> ([])
