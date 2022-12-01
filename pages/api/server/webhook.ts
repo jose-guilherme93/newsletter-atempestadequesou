@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   
   transporter.sendMail({
     from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
-    to: 'guiiih99@gmail.com',
+    to: 'jose-guilherme93@hotmail.com',
     subject: `boas vindas, ${req.body.nome}`,
     text: `exemplo de texto sem html`,
     html: `${data.data[0].caption}`
