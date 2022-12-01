@@ -9,8 +9,8 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
 
     res.send(req.query['hub.challenge'])
        
-    const token = process.env.NEXT_PUBLIC_INSTAGRAM_TOKEN
-    const fields = 'media_url, caption, picture, permalink'
+    const token = process.env.INSTAGRAM_TOKEN
+    const fields = 'media_url, caption'
     const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}&caption={caption} `
 
     const {data}: EmailProps = await axios.get(url)
@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
-      secure: true, 
+      secure: true,
       auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD
