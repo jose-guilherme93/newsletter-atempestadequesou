@@ -92,7 +92,7 @@ export default function Form() {
                     type="email"
                     className="w-4/5 border-transparent  focus:border-yellow-400 border-2 hover:border-yellow-400 rounded-lg text-zinc-500 shadow-sm shadow-zinc-500"
                     placeholder="moranguinho23@exemplo.com"
-                    {...register("email", { required: true })} 
+                    {...register("email", {pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,  required: true })} 
                 />
                 
                 {errors.email && <span className="text-left w-4/5 text-white font-serif ">esse email está meio estranho...</span>}

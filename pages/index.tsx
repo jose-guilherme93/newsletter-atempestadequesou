@@ -19,17 +19,18 @@ export default function Home() {
         <meta name="author" content="A tempestade que sou"/>
       </Head>
 
-    <main className="w-screen md:flex bg-gradient-to-l from-yellow-300 to-blue-600 ">
+      <main className="w-screen md:flex bg-gradient-to-l from-yellow-300 to-blue-600 ">
 
-      <Form />
- 
-      <div 
-        id="secondScreen" 
-        className="overflow-hidden w-screen items-center h-screen">
-          <MarqueeHorizontal />
-      </div>
-      
-    </main>
+        <Form />
+  
+        <div 
+          id="secondScreen" 
+          className="overflow-hidden w-screen items-center h-screen">
+            
+            <MarqueeHorizontal />
+        </div>
+        
+      </main>
     </>
   )
 }

@@ -41,7 +41,7 @@ export default function MarqueeHorizontal() {
             {
             isLoading ?
 
-            <div className="w-full flex flex-col items-center justify-center h-full">
+            <div className="w-full flex flex-col z-0 items-center justify-center h-full">
                 <Loading /> 
             </div>
 

@@ -7,7 +7,7 @@ import { EmailProps } from '../DTO';
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
-    res.send(req.query['hub.challenge'])
+    
        
     const token = process.env.INSTAGRAM_TOKEN
     const fields = 'media_url, caption'
@@ -31,6 +31,5 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     text: `exemplo de texto sem html`,
     html: `${data.data[0].caption}`
 })
-
 
 }
