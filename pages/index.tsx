@@ -13,6 +13,7 @@ export default function Home() {
       <Head>
         <title>A tempestade que sou</title>
         <meta charSet="UTF-8" />
+        <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="Página de captura de email para eventuais atualizações do instagram @atempestadequesou"/>
         <meta name="keywords" content="newsletter, landing page"/>
