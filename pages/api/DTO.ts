@@ -10,4 +10,5 @@ export interface EmailProps {
             caption: {caption: string}, media_url?: string
         ]
     }
+    
 }
