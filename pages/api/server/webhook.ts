@@ -6,8 +6,6 @@ import nodemailer from 'nodemailer'
 import { EmailProps } from '../DTO';
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
-
-    
        
     const token = process.env.INSTAGRAM_TOKEN
     const fields = 'media_url, caption'

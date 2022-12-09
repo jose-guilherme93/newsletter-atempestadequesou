@@ -14,6 +14,8 @@ interface UserFormData {
 }
 
 export default function Form() {
+
+
     const { register, handleSubmit, formState: { errors } } = useForm<UserFormData>()
 
     const [isSend, setIsSend] = useState(false)
@@ -42,6 +44,8 @@ export default function Form() {
         }, 2000)
         
     }
+
+    
     
     return (
        <div className="w-screen h-screen mb-auto mt-auto">
