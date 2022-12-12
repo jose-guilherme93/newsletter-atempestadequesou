@@ -16,13 +16,10 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
 
 const {email, nome} = req.body
 const uri = process.env.MONGODB_URI
-console.log(typeof uri)
+
 const db = await connectToDatabase(uri)
 
 
-db.collection('subscribers').indexExists(
-  email
-)
 
 const collection = db.collection('subscribers')
 await collection.insertOne(
@@ -56,8 +53,17 @@ transporter.sendMail({
 
 </style>
 <body>
-  <h3>é um prazer ter você aqui, ${req.body.nome}</h3>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tenetur adipisci quis quod, architecto quasi itaque vero dolore similique eius corporis, pariatur perferendis quas eaque cupiditate repellendus consequatur hic voluptatibus?</p>
+  <h3>é um prazer ter você aqui, no meu cantinho.</h3>
+
+  <p>Sempre que um texto novo for publicado no @atempestadequesou, irei mandar para você, por aqui. sem spam, e sem links chatos.</p>
+
+  <p>geralmente publico uma vez a cada duas semanas. mas outras, dois textos por semana. depende do ritmo dos meus sentimentos, dos pensamentos(que são muitos), e da disponibilidade. </p>
+
+  <p>ah, eu queria poder compartilhar mais do que meus textos por aqui. como livros que me inspiram, séries que despertam coisas muito boas e qualquer outra coisa que caiba nos assuntos dos meus textos.</p>
+
+  <p>tente marcar esse email como confiável, assim nunca chegará na caixa de spam. no mais, obrigado por ler.</p>
+  <br/>
+  <p>atempestadequesou</p>
 </body> `
 
 })
