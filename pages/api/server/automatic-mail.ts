@@ -4,11 +4,10 @@ import {MongoClient} from 'mongodb'
 
 async function connectToDatabase(uri: string) {
 
-  
-  
   const client = await MongoClient.connect(uri)
 
   const db = client.db('newsletter')
+
   return db
 }
 
@@ -19,15 +18,12 @@ const uri = process.env.MONGODB_URI
 
 const db = await connectToDatabase(uri)
 
-
-
 const collection = db.collection('subscribers')
 await collection.insertOne(
   {
     nome,
     email
   }
-  
 )
 
 let transporter = nodemailer.createTransport({
@@ -42,6 +38,7 @@ let transporter = nodemailer.createTransport({
 transporter.sendMail({
   from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
   to: email,
+  replyTo: "atempestadequesou@gmail.com",
   subject:  `boas vindas, ${nome}`,
   text: `exemplo de texto sem html`, 
   html: `<style>
@@ -64,6 +61,8 @@ transporter.sendMail({
   <p>tente marcar esse email como confiável, assim nunca chegará na caixa de spam. no mais, obrigado por ler.</p>
   <br/>
   <p>atempestadequesou</p>
+  <br/>
+  <a href="http://localhost:3000/api/server/delete-email">descadastrar seu email</a>
 </body> `
 
 })
