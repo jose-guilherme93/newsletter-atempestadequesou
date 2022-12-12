@@ -3,35 +3,38 @@ import nodemailer from 'nodemailer'
 import {MongoClient} from 'mongodb'
 
 async function connectToDatabase(uri: string) {
-
-  
   
   const client = await MongoClient.connect(uri)
 
   const db = client.db('newsletter')
+
   return db
 }
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
-const {email, nome} = req.body
-const uri = process.env.MONGODB_URI
-console.log(typeof uri)
-const db = await connectToDatabase(uri)
+  const uri = process.env.MONGODB_URI
+  const {email, nome} = req.body
 
-
-db.collection('subscribers').indexExists(
-  email
-)
-
-const collection = db.collection('subscribers')
-await collection.insertOne(
-  {
-    nome,
-    email
-  }
   
-)
+  const db = await connectToDatabase(uri)
+
+  const collection = db.collection('subscribers')
+
+
+  const duplicateEmail = await collection.findOne({ email });
+
+  if(duplicateEmail?.email !== email) {
+
+    await collection.insertOne(
+      {
+        nome,
+        email
+      }
+      
+    )
+  }
+
 
 let transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -56,7 +59,7 @@ transporter.sendMail({
 
 </style>
 <body>
-  <h3>é um prazer ter você aqui, ${req.body.nome}</h3>
+  <h3>é um prazer ter você aqui, ${nome}</h3>
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid tenetur adipisci quis quod, architecto quasi itaque vero dolore similique eius corporis, pariatur perferendis quas eaque cupiditate repellendus consequatur hic voluptatibus?</p>
 </body> `
 
