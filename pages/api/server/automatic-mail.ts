@@ -62,7 +62,7 @@ transporter.sendMail({
   <br/>
   <p>atempestadequesou</p>
   <br/>
-  <a href="http://localhost:3000/api/server/delete-email">descadastrar seu email</a>
+  <a href="https://atempestadequesou.com/delete-email">descadastrar seu email</a>
 </body> `
 
 })
