@@ -29,5 +29,5 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     text: `exemplo de texto sem html`,
     html: `${data.data[0].caption}`
 })
-
+return res.status(200).json({"message": "ok"})
 }
