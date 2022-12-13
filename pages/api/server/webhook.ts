@@ -1,33 +1,35 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import axios from 'axios'
 import nodemailer from 'nodemailer'
 
-import { EmailProps } from '../DTO';
-
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
-       
-    const token = process.env.INSTAGRAM_TOKEN
-    const fields = 'media_url, caption'
-    const url = `https://graph.instagram.com/me/media?access_token=${token}&fields=${fields}&caption={caption} `
 
-    const {data}: EmailProps = await axios.get(url)
-    
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD
-    }});
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }})
+
+  if (
+    req.query['hub.mode'] == 'subscribe' &&
+    req.query['hub.verify_token'] == process.env.WEBHOOK_TOKEN
+  ) {
+    res.send(req.query['hub.challenge'])
+  } else {
   
-  transporter.sendMail({
-    from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
-    to: 'jose-guilherme93@hotmail.com',
-    subject: `boas vindas, ${req.body.nome}`,
-    text: `exemplo de texto sem html`,
-    html: `${data.data[0].caption}`
-})
-return res.status(200).json({"message": "ok"})
+    res.status(200)
+
+    transporter.sendMail({
+      from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
+      to: 'jose-guilherme93@hotmail.com',
+      replyTo: "atempestadequesou@gmail.com",
+      subject: "excerto de mim",
+      text: `${req.body.entry[0].changes[0].value?.message}`,
+      html: `${req.body.entry[0].changes[0].value?.message}`
+  })
+}
+
 }
