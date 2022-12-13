@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer'
 import {MongoClient} from 'mongodb'
 
 async function connectToDatabase(uri: string) {
-
+  
   const client = await MongoClient.connect(uri)
 
   const db = client.db('newsletter')
@@ -13,18 +13,27 @@ async function connectToDatabase(uri: string) {
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
-const {email, nome} = req.body
-const uri = process.env.MONGODB_URI
+  const uri = process.env.MONGODB_URI
+  const {email, nome} = req.body
 
-const db = await connectToDatabase(uri)
+  
+  const db = await connectToDatabase(uri)
 
-const collection = db.collection('subscribers')
-await collection.insertOne(
-  {
-    nome,
-    email
+  const collection = db.collection('subscribers')
+
+
+  const duplicateEmail = await collection.findOne({ email });
+
+  if(duplicateEmail?.email !== email) {
+
+    await collection.insertOne(
+      {
+        nome,
+        email
+      }
+      
+    )
   }
-)
 
 let transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
