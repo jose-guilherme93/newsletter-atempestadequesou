@@ -17,7 +17,7 @@ export default function Hello() {
             <input 
                 id="inputName"
                 type="email" 
-                className="focus border-2 w-4/5 md:w-1/2 h-10 border-transparent focus:border-yellow-400 hover:border-yellow-400 rounded-lg mx-4 text-zinc-500 shadow-sm  shadow-zinc-500" 
+                className="focus border-2 w-4/5 md:w-80 h-10 border-transparent focus:border-yellow-400 hover:border-yellow-400 rounded-lg mx-4 text-zinc-500 shadow-sm  shadow-zinc-500" 
             />
 
             <button 
