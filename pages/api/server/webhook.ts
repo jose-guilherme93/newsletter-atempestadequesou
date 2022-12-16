@@ -31,5 +31,5 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
       html: `${req.body.entry[0].changes[0].value?.message}`
   })
 }
-
+return res.status(200).json({"message": "ok"})
 }
