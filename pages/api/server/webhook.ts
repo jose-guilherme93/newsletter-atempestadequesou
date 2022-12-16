@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   
     res.status(200)
 
-    transporter.sendMail({
+   await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
       to: 'jose-guilherme93@hotmail.com',
       replyTo: "atempestadequesou@gmail.com",

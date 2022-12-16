@@ -24,7 +24,7 @@ export default function Form() {
     const onSubmit:  SubmitHandler<UserFormData> = async (data) => {
         setIsSend(true)
         
-        fetch('./api/server/automatic-mail', {
+        fetch('./api/server/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
