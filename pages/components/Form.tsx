@@ -10,7 +10,7 @@ import {  IoIosArrowDown } from 'react-icons/io'
 interface UserFormData {
     nome: string
     email: string
-    handleSubmit: () => {}
+    
 }
 
 export default function Form() {
@@ -21,10 +21,10 @@ export default function Form() {
     const [isSend, setIsSend] = useState(false)
     
 
-    const onSubmit:  SubmitHandler<UserFormData> = async (data) => {
+    const onSubmit:  SubmitHandler<UserFormData> = async (data: UserFormData) => {
         setIsSend(true)
         
-        fetch('./api/server/subscribe', {
+        await fetch('./api/server/subscribe', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,20 +32,16 @@ export default function Form() {
             body: JSON.stringify({
                 nome: data.nome,
                 email: data.email
-                
             })
-        } )
         
-            
+        })
         
-        setTimeout(() => {
+        if (data) {
+            alert('obrigada por se cadastrar! seu email foi salvo.')
             setIsSend(false)
-            alert('obrigada por se cadastrar!')
-        }, 2000)
+        }
         
     }
-
-    
     
     return (
        <div className="w-screen h-screen mb-auto mt-auto">
@@ -102,12 +98,13 @@ export default function Form() {
                 {errors.email && <span className="text-left w-4/5 text-white font-serif ">esse email está meio estranho...</span>}
 
                 <button 
-                    disabled={isSend} 
+                    disabled={isSend === true} 
                     className="shadow-sm drop-shadow-sm shadow-zinc-400 disabled:opacity-40 font-serif text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" 
                     type="submit"
                 >
-                {isSend ? 'enviando...' : 'enviar'}
+                {isSend ? '...' : 'enviar'}
                 </button>
+                <span className='text-white'>{isSend ? 'aguarde...' : ''}</span>
                 
                 
 
