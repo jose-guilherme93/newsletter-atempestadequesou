@@ -1,19 +1,48 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, FormEventHandler, useState } from 'react'
 
 import { signIn } from 'next-auth/react'
 
 
 export default  function Auth() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    const handleSubmit = async (e: FormEvent) => {
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
+        
+    }
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        
+        setPassword(e.target.value)
+    }
+
+
+    const handleSubmit = async  (e: FormEvent) => {
         e.preventDefault()
-         await signIn('credentials', { redirect: true,
-            email: "hello@gmail.com", password: "1234"
+        const result = await signIn('credentials', { redirect: false,
+            email: email, password: password
         
         })
+        
+        console.log(result)
     }
+
     return (
-        <button onClick={handleSubmit}>logado</button>
+        <div className='w-screen h-screen flex flex-col items-center justify-center'>
+            <form onSubmit={handleSubmit}  className='flex flex-col gap-2'>
+                <div className='w-full' >
+                    <label className='flex' htmlFor="email">email</label>
+                    <input id='email' onChange={handleEmailChange} className='rounded-lg' type="text" />
+
+                </div>
+                
+                <div>
+                    <label className='flex' htmlFor="password">senha</label>
+                    <input id='password' onChange={handlePasswordChange} className='rounded-lg' type="password" />
+                </div>
+                <input type='submit' className='rounded-md text-center w-20 h-10 ml-auto mr-auto bg-yellow-400 '  value="logar"/>
+            </form>
+        </div>
     )
 }
 
