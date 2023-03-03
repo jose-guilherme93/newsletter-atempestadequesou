@@ -1,5 +1,6 @@
-import React, { FormEvent, FormEventHandler, useState } from 'react'
-
+import React, { FormEvent, FormEventHandler, useEffect, useState } from 'react'
+import Router from 'next/router'
+import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
 
 
@@ -7,10 +8,19 @@ export default  function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const {status} = useSession()
+
+    useEffect(() => {
+        if (status == 'authenticated') {
+            Router.replace("/components/auth/PostToInstagram")
+        } 
+    }, [status])
+
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
         
     }
+
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         
         setPassword(e.target.value)

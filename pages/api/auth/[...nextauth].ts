@@ -17,7 +17,7 @@ const options: NextAuthOptions = {
         const {email, password} = credentials as {
             email: string, password: string
         }
-        console.log(credentials)
+        
         
         if(email !== process.env.LOGIN_POST || password !== process.env.PASSWORD_POST) {
 

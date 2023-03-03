@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import Router from 'next/router'
 import { signIn, signOut } from 'next-auth/react'
 import { useSession } from 'next-auth/react'
 
@@ -12,14 +12,15 @@ export default function PostToInstagram() {
     
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputTextArea(event.target.value)
-        alert(inputTextArea)
+        
     }
     
+   
 
     return(
         <>
             {
-                status === 'loading' ? <h3>loading</h3> : (
+                status === 'loading' ? <h3>loading...</h3> : (
 
                     status === 'authenticated' ? (
                         <div className='w-full h-screen flex gap-3 items-center justify-center flex-col'>
@@ -38,13 +39,19 @@ export default function PostToInstagram() {
                         <button 
                             className='w-32 p-2 text-zinc-700 rounded-md border border-solid bg-yellow-400 font-sans'>
                                 enviar post</button>
+                                {inputTextArea}
                         </div>
                     )
 
                     : 
 
+                    <div className='w-screen h-screen flex flex-col items-center justify-center'>
                         <h1>você não está autorizado</h1>
-                
+                        <button className='w-32 p-2 text-zinc-900 rounded-md border border-solid bg-yellow-400 font-sans' onClick={() => {
+                            Router.replace("/components/auth")
+                        }}> logar</button>    
+                    </div>
+
                 )
             }
         </>
