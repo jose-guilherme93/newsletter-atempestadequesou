@@ -24,7 +24,7 @@ export default function PostToInstagram() {
 
                     status === 'authenticated' ? (
                         <div className='w-full h-screen flex gap-3 items-center justify-center flex-col'>
-                        <button className='w-32 p-2 text-zinc-700 rounded-md border border-solid bg-yellow-400 font-sans' onClick={() => signOut()} >signOut</button>
+                     
 
                         <textarea 
                             onChange={handleChange} 
