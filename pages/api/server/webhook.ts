@@ -4,6 +4,8 @@ import nodemailer from 'nodemailer'
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
+  const mailPostText =  req.body.inputTextArea.replace(/\n/g,"<br>")
+
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -12,24 +14,18 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     user: process.env.EMAIL,
     pass: process.env.PASSWORD
   }})
-
-  if (
-    req.query['hub.mode'] == 'subscribe' &&
-    req.query['hub.verify_token'] == process.env.WEBHOOK_TOKEN
-  ) {
-    res.send(req.query['hub.challenge'])
-  } else {
-  
-    res.status(200)
+ 
+ 
+   res.status(200)
 
    await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
       to: 'jose-guilherme93@hotmail.com',
       replyTo: "atempestadequesou@gmail.com",
       subject: "excerto de mim",
-      text: `${req.body.entry[0].changes[0].value?.message}`,
-      html: `${req.body.entry[0].changes[0].value?.message}`
-  })
-}
-return res.status(200).json({"message": "ok"})
-}
+      text: mailPostText,
+      html: mailPostText
+
+   })
+
+  }

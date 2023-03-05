@@ -4,5 +4,5 @@ export default function Loading() {
 
     return (
         <TailSpin color="#0000ff" />
-    )    
-} 
+    )
+}
