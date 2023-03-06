@@ -28,11 +28,11 @@ return(
                         
                     status === 'authenticated' ? (
                        <form onSubmit={handleSubmit}>
-                         <div className='w-full h-screen flex gap-3 items-center justify-center flex-col'>
+                         <div className='w-full h-screen flex gap-3 items-center flex-col'>
                      
                             <textarea 
                                 onChange={handleChange} 
-                                className='w-11/12 m-1 rounded-xl overflow-visible h-auto' 
+                                className='w-11/12 m-1 rounded-xl' 
                                 name="nova postagem" 
                                 id="post" 
                                 cols={30} 
@@ -42,7 +42,7 @@ return(
                             >
                             </textarea>
                             <button 
-                                className='w-32 p-2 text-zinc-700 rounded-md border border-solid bg-yellow-400 font-sans'>
+                                className='w-32  p-2 text-zinc-700 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1'>
                                     enviar post</button>
                      </div>
                        </form>
