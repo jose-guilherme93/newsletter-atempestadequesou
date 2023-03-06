@@ -14,9 +14,6 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     user: process.env.EMAIL,
     pass: process.env.PASSWORD
   }})
- 
- 
-   res.status(200)
 
    await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
@@ -27,5 +24,12 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
       html: mailPostText
 
    })
+   .then((response) => {
+    console.log(response)
+   })
 
+   .catch((error) => {
+    console.log(error)
+   })
+  return res.status(200)
   }

@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import Loading from '../Loading'
 
 export default function PostToInstagram() {
-    
+    const [isSending, setIsSending] = useState(false)
     const {status } = useSession()
     const [inputTextArea, setInputTextArea] = useState({})
     
@@ -15,22 +15,31 @@ export default function PostToInstagram() {
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        await axios.post('/api/server/webhook', {
+        setIsSending(true)
+        await axios.post('/api/server/mailHandling', {
             inputTextArea
+        })
+          .catch(function (error) {
+            console.log(error)
           })
 
+          .finally(() => {
+            setIsSending(false)
+          })
+        
     }
     
-return(
+return (
         <>
             {
-                status === 'loading' ? <> <Loading /></> : (
+                status === 'loading' ? <div className='flex w-screen h-screen justify-center items-center'> <Loading /></div> : (
                         
                     status === 'authenticated' ? (
                        <form onSubmit={handleSubmit}>
                          <div className='w-full h-screen flex gap-3 items-center flex-col'>
-                     
-                            <textarea 
+                            <label htmlFor="post">nova postagem</label>
+                            <textarea
+                                required
                                 onChange={handleChange} 
                                 className='w-11/12 m-1 rounded-xl' 
                                 name="nova postagem" 
@@ -42,8 +51,9 @@ return(
                             >
                             </textarea>
                             <button 
-                                className='w-32  p-2 text-zinc-700 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1'>
+                                className='w-32  p-2 text-zinc-700 disabled:opacity-80 disabled:mt-0 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1' disabled={!inputTextArea} >
                                     enviar post</button>
+                                     {isSending ? <Loading /> : false}
                      </div>
                        </form>
                     )
@@ -52,7 +62,7 @@ return(
 
                     <div className='w-screen h-screen flex flex-col items-center justify-center'>
                         <h1>você não está autorizado</h1>
-                        <button className='w-32 p-2 text-zinc-900 rounded-md border border-solid bg-yellow-400 font-sans' onClick={() => {
+                        <button className='w-32 p-2 disabled:bg-yellow-50  text-zinc-900 rounded-md border border-solid bg-yellow-400 font-sans' onClick={() => {
                             Router.replace("/components/auth")
                         }}> logar</button>    
                     </div>
