@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react'
 import Loading from '../Loading'
 
 export default function PostToInstagram() {
-    const [isSending, setIsSending] = useState(false)
+    
     const {status } = useSession()
     const [inputTextArea, setInputTextArea] = useState({})
     
@@ -15,18 +15,13 @@ export default function PostToInstagram() {
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setIsSending(true)
-        await axios.post('/api/server/mailHandling', {
+        
+        await axios.post('/api/server/mail-handling', {
             inputTextArea
         })
           .catch(function (error) {
             console.log(error)
           })
-
-          .finally(() => {
-            setIsSending(false)
-          })
-        
     }
     
 return (
@@ -36,7 +31,7 @@ return (
                         
                     status === 'authenticated' ? (
                        <form onSubmit={handleSubmit}>
-                         <div className='w-full h-screen flex gap-3 items-center flex-col'>
+                        <div className='w-full h-screen flex gap-3 items-center flex-col'>
                             <label htmlFor="post">nova postagem</label>
                             <textarea
                                 required
@@ -53,8 +48,8 @@ return (
                             <button 
                                 className='w-32  p-2 text-zinc-700 disabled:opacity-80 disabled:mt-0 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1' disabled={!inputTextArea} >
                                     enviar post</button>
-                                     {isSending ? <Loading /> : false}
-                     </div>
+                                     
+                        </div>
                        </form>
                     )
 

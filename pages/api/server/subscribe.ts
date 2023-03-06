@@ -4,23 +4,7 @@ import type {
 
 import nodemailer from 'nodemailer'
 
-import {MongoClient, Db} from 'mongodb'
-
-
-let cachedDb: Db
-
-async function connectToDatabase(uri: string) {
-  
-  if (cachedDb) return cachedDb
-
-    const client = await MongoClient.connect(uri)
-  
-    const db = client.db('newsletter')
-    cachedDb = db
-
-    return db
-
-}
+import connectToDatabase from './connect-to-database'
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
@@ -39,7 +23,6 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
           nome,
           email
         }
-        
       )
     }
 
