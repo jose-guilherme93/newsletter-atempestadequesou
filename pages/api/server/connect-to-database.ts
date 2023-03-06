@@ -1,7 +1,7 @@
 import {MongoClient, Db} from 'mongodb'
 
 
-const uri = process.env.MONGODB_URI
+export const uri = process.env.MONGODB_URI
 
 let cachedDb: Db
 
