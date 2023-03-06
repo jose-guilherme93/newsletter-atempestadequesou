@@ -1,5 +1,8 @@
 import React, { FormEvent, useEffect, useState } from 'react'
+
 import Router from 'next/router'
+import Head from 'next/head'
+
 import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
 
@@ -36,7 +39,11 @@ export default  function Auth() {
     }
 
     return (
-        <div className='w-screen h-screen flex flex-col items-center justify-center'>
+       <>
+            <Head>
+                <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+            </Head>
+             <div className='w-screen h-screen flex flex-col items-center justify-center'>
             <form onSubmit={handleSubmit}  className='flex flex-col gap-2'>
                 <div className='w-full' >
                     <label className='flex' htmlFor="email">email</label>
@@ -51,6 +58,7 @@ export default  function Auth() {
                 <input type='submit' className='rounded-md text-center w-20 h-10 ml-auto mr-auto bg-yellow-400 '  value="logar"/>
             </form>
         </div>
+       </>
     )
 }
 
