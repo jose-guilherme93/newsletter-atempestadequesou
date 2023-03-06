@@ -70,7 +70,7 @@ await transporter.sendMail({
 
   <p>ah, eu queria poder compartilhar mais do que meus textos por aqui. como livros que me inspiram, séries que despertam coisas muito boas e qualquer outra coisa que caiba nos assuntos dos meus textos.</p>
 
-  <p>tente marcar esse email como confiável, assim nunca chegará na caixa de spam. no mais, obrigado por ler.</p>
+  <p>tente marcar esse email como confiável, assim nunca chegará na caixa de spam. no mais, obrigada por ler.</p>
   <br/>
   <p>atempestadequesou</p>
   <br/>
