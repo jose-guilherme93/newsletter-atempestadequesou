@@ -5,9 +5,6 @@ export interface PostsProps {
 }
 
 export interface EmailProps {
-    data: {
-        data: [
-            caption: {caption: string}, media_url?: string
-        ]
-    }
+    
 }
+

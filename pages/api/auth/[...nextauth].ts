@@ -31,7 +31,7 @@ const options: NextAuthOptions = {
     
 ],
 pages: {
-    signIn: '/components/auth/signin',
+    signIn: '/components/auth',
     signOut: "/auth/signout",
     error: "auth/error"
 }

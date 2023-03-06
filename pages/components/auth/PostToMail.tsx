@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import Loading from '../Loading'
 
 export default function PostToInstagram() {
-
+    
     const {status } = useSession()
     const [inputTextArea, setInputTextArea] = useState({})
     
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputTextArea(event.target.value)
-        
     }
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -21,11 +21,11 @@ export default function PostToInstagram() {
 
     }
     
-    return(
+return(
         <>
             {
-                status === 'loading' ? <h3>loading...</h3> : (
-
+                status === 'loading' ? <> <Loading /></> : (
+                        
                     status === 'authenticated' ? (
                        <form onSubmit={handleSubmit}>
                          <div className='w-full h-screen flex gap-3 items-center justify-center flex-col'>
@@ -36,7 +36,8 @@ export default function PostToInstagram() {
                                 name="nova postagem" 
                                 id="post" 
                                 cols={30} 
-                                maxLength={2000} 
+                                maxLength={2000}
+                                minLength={75}
                                 rows={15}
                             >
                             </textarea>
