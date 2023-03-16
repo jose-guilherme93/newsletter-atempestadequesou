@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
+
 import Loading from '../Loading'
+
 
 export default function PostToInstagram() {
     
@@ -30,27 +32,39 @@ return (
                 status === 'loading' ? <div className='flex w-screen h-screen justify-center items-center'> <Loading /></div> : (
                         
                     status === 'authenticated' ? (
-                       <form onSubmit={handleSubmit}>
-                        <div className='w-full h-screen flex gap-3 items-center flex-col'>
-                            <label htmlFor="post">nova postagem</label>
-                            <textarea
-                                required
-                                onChange={handleChange} 
-                                className='w-11/12 m-1 rounded-xl' 
-                                name="nova postagem" 
-                                id="post" 
-                                cols={30} 
-                                maxLength={2000}
-                                minLength={75}
-                                rows={15}
-                            >
-                            </textarea>
-                            <button 
-                                className='w-32  p-2 text-zinc-700 disabled:opacity-80 disabled:mt-0 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1' disabled={!inputTextArea} >
-                                    enviar post</button>
-                                     
-                        </div>
-                       </form>
+                        <> 
+                            <header>
+                            </header>
+                            <form onSubmit={handleSubmit}>
+                                <div className='w-full h-screen flex gap-3 justify-center items-center flex-col'>
+                                    <div className='w-full flex items-center justify-evenly'>
+                                        <label className='text-2xl text-zinc-700 font-sans' htmlFor="post">nova postagem</label>
+                                        <button onClick={() => signOut()} className='w-32 p-2 text-zinc-700 disabled:opacity-80 disabled:mt-0 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1' >signOut</button>
+
+                                    </div>
+
+                                    <textarea
+                                        required
+                                        onChange={handleChange} 
+                                        className='w-11/12 m-1 rounded-xl' 
+                                        name="nova postagem" 
+                                        id="post" 
+                                        cols={30} 
+                                        maxLength={2000}
+                                        minLength={75}
+                                        rows={15}
+                                        >
+                                    </textarea>
+
+                                    <button 
+                                        className='w-32  p-2 text-zinc-700 disabled:opacity-80 disabled:mt-0 rounded-md border-none bg-yellow-400 font-sans hover:bg-yellow-300 active:mt-1' 
+                                        disabled={!inputTextArea} >
+                                            enviar post
+                                    </button>
+                                            
+                                </div>
+                            </form>
+                        </>
                     )
 
                     : 
