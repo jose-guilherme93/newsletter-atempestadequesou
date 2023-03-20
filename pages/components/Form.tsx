@@ -45,9 +45,9 @@ export default function Form() {
     }
     
     return (
-       <div className="w-screen h-screen mb-auto mt-auto">
+       <div className="w-screen h-screen mt-auto mb-auto">
             <form 
-                className=" w-full h-full bg-blue flex flex-col items-center justify-center" 
+                className="flex flex-col items-center justify-center w-full h-full bg-blue" 
                 onSubmit={handleSubmit(onSubmit)}
             >
 
@@ -57,17 +57,17 @@ export default function Form() {
                     width={100}
                     height={100}
                     alt="logo"
-                    className=" mb-4 rounded-full"
+                    className="mb-4 rounded-full "
                 />
  
                 <h1 
-                    className="p-3 rounded-lg w-4/5  text-center text-2xl bg-zinc-50 border-2 hover:border-yellow-400 shadow-sm shadow-zinc-500 text-zinc-700 font-serif"
+                    className="w-4/5 p-3 font-serif text-2xl text-center border-2 rounded-lg shadow-sm bg-zinc-50 hover:border-yellow-400 shadow-zinc-500 text-zinc-700"
                 >
                 meus pensamentos, minhas histórias, minhas sensações. na sua caixa de email.</h1>
                 <br />
 
                 <label 
-                    className="text-left w-4/5 text-white text-lg font-serif" 
+                    className="w-4/5 font-serif text-lg text-left text-white" 
                     htmlFor="inputName"
                 > 
                 seu nome mais bonito
@@ -75,32 +75,32 @@ export default function Form() {
                 
                 <input
                     id="inputName"
-                    className=" w-4/5 focus border-2 border-transparent focus:border-yellow-400 hover:border-yellow-400 rounded-lg mx-4 text-zinc-500 shadow-sm  shadow-zinc-500" 
+                    className="w-4/5 mx-4 border-2 border-transparent rounded-lg shadow-sm focus focus:border-yellow-400 hover:border-yellow-400 text-zinc-500 shadow-zinc-500" 
                     type="text"
                     placeholder="seu nome"
                     {...register("nome", { required: true })}
                 />
-                    {errors.nome && <span className="text-left font-serif w-4/5 text-white">ei, não esqueça seu nome</span>}
+                    {errors.nome && <span className="w-4/5 font-serif text-left text-white">ei, não esqueça seu nome</span>}
                 
                 <label 
                     htmlFor="inputEmail" 
-                    className="text-left w-4/5 text-white text-lg font-serif mt-4 "
+                    className="w-4/5 mt-4 font-serif text-lg text-left text-white "
                 >
                 seu email
                 </label>
                 <input
                     id="inputEmail"
                     type="email"
-                    className="w-4/5 border-transparent  focus:border-yellow-400 border-2 hover:border-yellow-400 rounded-lg text-zinc-500 shadow-sm shadow-zinc-500"
+                    className="w-4/5 border-2 border-transparent rounded-lg shadow-sm focus:border-yellow-400 hover:border-yellow-400 text-zinc-500 shadow-zinc-500"
                     placeholder="moranguinho23@exemplo.com"
                     {...register("email", {pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,  required: true })} 
                 />
                 
-                {errors.email && <span className="text-left w-4/5 text-white font-serif ">esse email está meio estranho...</span>}
+                {errors.email && <span className="w-4/5 font-serif text-left text-white ">esse email está meio estranho...</span>}
 
                 <button 
                     disabled={isSend === true} 
-                    className="shadow-sm drop-shadow-sm shadow-zinc-400 disabled:opacity-40 font-serif text-white text-lg border-solid border-2 rounded-lg h-10 w-4/5 sm:w-48 mt-4 hover:bg-yellow-400" 
+                    className="w-4/5 h-10 mt-4 font-serif text-lg text-white border-2 border-solid rounded-lg shadow-sm drop-shadow-sm shadow-zinc-400 disabled:opacity-40 sm:w-48 hover:bg-yellow-400" 
                     type="submit"
                 >
                 {isSend ? '...' : 'enviar'}
@@ -112,7 +112,7 @@ export default function Form() {
                 <button  
                     onClick={() => document.location.href = "#secondScreen"} 
                     type="button" 
-                    className="md:hidden mt-4 opacity-40"
+                    className="mt-4 md:hidden opacity-40"
                 >
                 <IoIosArrowDown size={60}/>
                 </button>

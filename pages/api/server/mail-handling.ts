@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import nodemailer from 'nodemailer'
 import connectToDatabase, { uri } from './connect-to-database'
-import { Db } from 'mongodb'
+
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
   
@@ -30,19 +30,25 @@ getEmails()
     auth: {
     user: process.env.EMAIL,
     pass: process.env.PASSWORD
-  }})
 
+    
+  }}) 
+  
    await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
-      to: emails,
+      
+      bcc: 'jose-guilherme93@hotmail.com, guiiih99@gmail.com, atempestadequesou@gmail.com',
+      cc: 'atempestadequesou@gmail.com',
       replyTo: "atempestadequesou@gmail.com",
       subject: "excerto de mim",
       text: mailPostText,
       html: mailPostText
-
-   })
+   
+   } )
+    
    .catch((error) => {
     console.log(error)
    })
-  return res.status(200)
+  return res.json("ok")
   }
+  
