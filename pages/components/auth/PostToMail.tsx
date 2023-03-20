@@ -17,19 +17,21 @@ export default function PostToInstagram() {
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        
-        await axios.post('/api/server/mail-handling', {
-            inputTextArea
-        })
-        .then(() => {
-
-            setInputTextArea('')
-            alert('post enviado')
-            Router.reload()
-        })
-          .catch((error) => {
-              console.log(error)
-          })
+        const confirmMessage = confirm('enviar postagem?')
+        if(confirmMessage) {
+            await axios.post('/api/server/mail-handling', {
+                inputTextArea
+            })
+            .then(() => {
+    
+                alert('post enviado')
+                Router.reload()
+            })
+            
+            .catch((error) => {
+                console.log(error)
+            })
+        }
     }
     
 return (

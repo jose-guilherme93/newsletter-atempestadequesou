@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     })
     return emails
   }
-
+console.log(emails)
 getEmails()
   
   const transporter = nodemailer.createTransport({
@@ -36,7 +36,7 @@ getEmails()
   
    await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
-      bcc: emails,
+      bcc: 'jose-guilherme93@hotmail.com, guiiih99@gmail.com',
       replyTo: "atempestadequesou@gmail.com",
       subject: "excerto de mim",
       text: mailPostText,
