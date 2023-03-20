@@ -36,9 +36,7 @@ getEmails()
   
    await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
-      
-      bcc: 'jose-guilherme93@hotmail.com, guiiih99@gmail.com, atempestadequesou@gmail.com',
-      cc: 'atempestadequesou@gmail.com',
+      to: emails,
       replyTo: "atempestadequesou@gmail.com",
       subject: "excerto de mim",
       text: mailPostText,
