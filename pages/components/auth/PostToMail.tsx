@@ -60,7 +60,7 @@ return (
                                         name="nova postagem" 
                                         id="post" 
                                         cols={30} 
-                                        maxLength={2000}
+                                        maxLength={2200}
                                         minLength={75}
                                         rows={15}
                                         >
