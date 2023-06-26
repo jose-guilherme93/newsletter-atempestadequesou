@@ -16,7 +16,7 @@ export default  function Auth() {
     useEffect(() => {
         if (status == 'authenticated') {
             Router.replace("/components/auth/PostToMail")
-        } 
+        } else if (status == 'unauthenticated') {alert('n autorizado')}
     }, [status])
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
