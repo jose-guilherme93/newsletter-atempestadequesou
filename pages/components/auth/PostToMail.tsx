@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
 import { useSession, signOut } from 'next-auth/react'
@@ -37,13 +37,18 @@ export default function PostToInstagram() {
 return (
         <>
             {
-                status === 'loading' ? <div className='flex items-center justify-center w-screen h-screen'> <Loading /></div> : (
+                status === 'loading' ? 
+
+                <div className='flex items-center justify-center w-screen h-screen'>
+                    <Loading />
+                </div> 
+
+                : 
+
+                (
                         
                     status === 'authenticated' ? (
                         <> 
-                            <header>
-                                
-                            </header>
                             <form onSubmit={handleSubmit}>
                                 <div className='flex flex-col items-center justify-center w-full h-screen gap-3'>
                                     <div className='flex items-center w-full justify-evenly'>

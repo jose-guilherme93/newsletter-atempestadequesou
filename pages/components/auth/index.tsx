@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 
-import Router from 'next/router'
-import Head from 'next/head'
+
+import  {Router} from 'next'
 
 import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
