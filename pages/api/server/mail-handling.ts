@@ -3,15 +3,23 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 import connectToDatabase, { uri } from './connect-to-database'
 
-
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
+
+  const vercelEnv = process.env.VERCEL_ENV
+
+  let collectionData: string
+
+  if (vercelEnv === 'development') {
+    collectionData = 'development_subscribers'
+  }
+  else collectionData = 'subscribers'
   
   const mailPostText =  req.body.inputTextArea.replace(/\n/g,"<br>")
 
   let emails: any = []
   async function getEmails() {
     const db = await connectToDatabase(uri)
-    const collection = db.collection('subscribers')
+    const collection = db.collection(collectionData)
     const cursor = collection.find({});
     await cursor.forEach((doc) => {
       emails.push(doc.email)
@@ -20,7 +28,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     })
     return emails
   }
-console.log(emails)
+
 getEmails()
   
   const transporter = nodemailer.createTransport({

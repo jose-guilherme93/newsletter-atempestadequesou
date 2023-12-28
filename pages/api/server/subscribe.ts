@@ -8,12 +8,21 @@ import connectToDatabase from './connect-to-database'
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
+  
+  const vercelEnv = process.env.VERCEL_ENV
+
+  let collectionData: string
+  if (vercelEnv === 'development') {
+    collectionData = 'development_subscribers'
+  }
+  else collectionData = 'subscribers'
+
   const uri = process.env.MONGODB_URI
 
   const {email, nome} = req.body
   
   const db = await connectToDatabase(uri)
-  const collection = db.collection('subscribers')
+  const collection = db.collection(collectionData)
 
   const duplicateEmail = await collection.findOne({ email })
     if(duplicateEmail?.email !== email) {

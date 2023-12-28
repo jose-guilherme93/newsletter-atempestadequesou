@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
+import Head from 'next/head'
 
-
-import  {Router} from 'next'
+import  {useRouter} from 'next/navigation'
 
 import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
@@ -12,10 +12,10 @@ export default  function Auth() {
     const [password, setPassword] = useState('')
 
     const {status} = useSession()
-
+    const route = useRouter()
     useEffect(() => {
         if (status == 'authenticated') {
-            Router.replace("/components/auth/PostToMail")
+            route.replace("/components/auth/PostToMail")
         } else if (status == 'unauthenticated') {alert('n autorizado')}
     }, [status])
 
@@ -43,7 +43,7 @@ export default  function Auth() {
             <Head>
                 <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
             </Head>
-             <div className='w-screen h-screen flex flex-col items-center justify-center'>
+             <div className='flex flex-col items-center justify-center w-screen h-screen'>
             <form onSubmit={handleSubmit}  className='flex flex-col gap-2'>
                 <div className='w-full' >
                     <label className='flex' htmlFor="email">email</label>
@@ -55,7 +55,7 @@ export default  function Auth() {
                     <label className='flex' htmlFor="password">senha</label>
                     <input id='password' onChange={handlePasswordChange} className='rounded-lg' type="password" />
                 </div>
-                <input type='submit' className='rounded-md text-center w-20 h-10 ml-auto mr-auto bg-yellow-400 '  value="logar"/>
+                <input type='submit' className='w-20 h-10 ml-auto mr-auto text-center bg-yellow-400 rounded-md '  value="logar"/>
             </form>
         </div>
        </>
