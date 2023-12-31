@@ -64,7 +64,7 @@ return (
                                     <section className='items-center w-full m-5 form-control'>
 
                                         <label className='label-text' htmlFor="title">Título da postagem</label>
-                                        <input onChange={handleTitleChange} type="text" id='title' className='w-1/4 p-4 input input-bordered' name='title' />
+                                        <input onChange={handleTitleChange} type="text" id='title' className='p-4 lg:w-1/4 input input-bordered' name='title' />
                                     </section>
 
                                     <textarea
