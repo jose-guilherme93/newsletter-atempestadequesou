@@ -10,9 +10,13 @@ export default function PostToInstagram() {
     
     const {status } = useSession()
     const [inputTextArea, setInputTextArea] = useState('')
+    const [inputTitle, setInputTitle] = useState('')
     
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputTextArea(event.target.value)
+    }
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputTitle(event.target.value)
     }
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -20,7 +24,7 @@ export default function PostToInstagram() {
         const confirmMessage = confirm('enviar postagem?')
         if(confirmMessage) {
             await axios.post('/api/server/mail-handling', {
-                inputTextArea
+                inputTextArea, inputTitle
             })
             .then(() => {
     
@@ -49,19 +53,24 @@ return (
                         
                     status === 'authenticated' ? (
                         <> 
-                            <form onSubmit={handleSubmit}>
-                                <div className='flex flex-col items-center justify-center w-full h-screen gap-3'>
-                                    <div className='flex items-center w-full justify-evenly'>
+                            <form onSubmit={handleSubmit} className='items-center justify-center w-screen h-full'>
+                                <div className='items-center w-full h-screen form-control'>
+                                    <div className='flex flex-col items-center w-1/4 p-4 mt-10'>
+                                        <button onClick={() => signOut()} className='btn btn-warning'>signOut</button>
                                         <label className='font-sans text-2xl text-zinc-700' htmlFor="post">nova postagem</label>
-                                        <button onClick={() => signOut()} className='w-32 p-2 font-sans bg-yellow-400 border-none rounded-md text-zinc-700 disabled:opacity-80 disabled:mt-0 hover:bg-yellow-300 active:mt-1' >signOut</button>
 
                                     </div>
 
+                                    <section className='items-center w-full m-5 form-control'>
+
+                                        <label className='label-text' htmlFor="title">Título da postagem</label>
+                                        <input onChange={handleTitleChange} type="text" id='title' className='w-1/4 p-4 input input-bordered' name='title' />
+                                    </section>
+
                                     <textarea
                                         required
-                                        
                                         onChange={handleChange} 
-                                        className='w-11/12 m-1 rounded-xl' 
+                                        className='w-full max-w-xs border-primary textarea textarea-bordered textarea-lg' 
                                         name="nova postagem" 
                                         id="post" 
                                         cols={30} 
@@ -72,7 +81,7 @@ return (
                                     </textarea>
 
                                     <button 
-                                        className='w-32 p-2 font-sans bg-yellow-400 border-none rounded-md text-zinc-700 disabled:opacity-80 disabled:mt-0 hover:bg-yellow-300 active:mt-1' 
+                                        className='mt-5 text-white btn btn-primary' 
                                         disabled={!inputTextArea} >
                                             enviar post
                                     </button>

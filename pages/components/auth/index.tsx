@@ -34,8 +34,6 @@ export default  function Auth() {
         await signIn('credentials', { redirect: false,
             email: email, password: password
         })
-        
-        
     }
 
     return (
@@ -47,15 +45,15 @@ export default  function Auth() {
             <form onSubmit={handleSubmit}  className='flex flex-col gap-2'>
                 <div className='w-full' >
                     <label className='flex' htmlFor="email">email</label>
-                    <input id='email' onChange={handleEmailChange} className='rounded-lg' type="text" />
+                    <input id='email' onChange={handleEmailChange} className='input input-bordered input-primary' type="text" />
 
                 </div>
                 
                 <div>
                     <label className='flex' htmlFor="password">senha</label>
-                    <input id='password' onChange={handlePasswordChange} className='rounded-lg' type="password" />
+                    <input id='password' onChange={handlePasswordChange} className='input input-bordered input-secondary' type="password" />
                 </div>
-                <input type='submit' className='w-20 h-10 ml-auto mr-auto text-center bg-yellow-400 rounded-md '  value="logar"/>
+                <input type='submit' className='w-20 h-10 ml-auto mr-auto text-center rounded-md btn-primary btn '  value="logar"/>
             </form>
         </div>
        </>

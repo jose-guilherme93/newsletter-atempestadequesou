@@ -14,6 +14,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   }
   else collectionData = 'subscribers'
   
+  const mailpostTitle = req.body.inputTitle
   const mailPostText =  req.body.inputTextArea.replace(/\n/g,"<br>")
 
   let emails: any = []
@@ -46,7 +47,7 @@ getEmails()
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
       bcc: emails,
       replyTo: "atempestadequesou@gmail.com",
-      subject: "excerto de mim",
+      subject: mailpostTitle,
       text: mailPostText,
       html: mailPostText
    

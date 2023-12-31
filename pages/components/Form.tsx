@@ -65,16 +65,16 @@ export default function Form() {
                         />
                         
                       
-                            <Balancer>
-                            <h1 className="text-3xl font-bold text-left">oi, meu nome é daysi</h1>
+                        <Balancer>
+                        <h1 className="text-3xl font-bold text-left">oi, meu nome é daysi</h1>
 
-                                <p className="py-6 text-xl text-left">meus textos podem ser lidos no instagram <span><Link href={"https://instagram.com/atempestadequesou"} className='underline link-secondary'>
-                                    @atempestadequesou
-                                </Link>
-                                </span>
-                                ,{' '}mas se quiser saber mais, <span><Link className= 'underline link-secondary' href={'/components/About'}>clique aqui</Link></span>.
-                                </p>
-                            </Balancer>
+                            <p className="py-6 text-xl text-left">meus textos podem ser lidos no instagram <span><Link href={"https://instagram.com/atempestadequesou"} className='underline link-secondary'>
+                                @atempestadequesou
+                            </Link>
+                            </span>
+                            ,{' '}mas se quiser saber mais, <span><Link className= 'underline link-secondary' href={'/components/About'}>clique aqui</Link></span>.
+                            </p>
+                        </Balancer>
                         
                         
                     </div>
@@ -93,7 +93,7 @@ export default function Form() {
                         
                         <input
                             id="inputName"
-                            className="max-w-lg shadow-sm input input-secondary" 
+                            className="max-w-lg font-bold shadow-sm text-zinc-500 input input-secondary" 
                             type="text"
                             placeholder="seu nome"
                             {...register("nome", { required: true })}
@@ -113,7 +113,7 @@ export default function Form() {
                         <input
                             id="inputEmail"
                             type="email"
-                            className="shadow-sm input input-primary input-bordered"
+                            className="font-bold shadow-sm text-zinc-500 input input-primary input-bordered"
                             placeholder="moranguinho23@exemplo.com"
                             {...register("email", {pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,  required: true })} 
                             />

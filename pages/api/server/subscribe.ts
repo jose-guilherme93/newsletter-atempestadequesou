@@ -8,7 +8,6 @@ import connectToDatabase from './connect-to-database'
 
 export default async function handler(req: NextApiRequest , res: NextApiResponse) {
 
-  
   const vercelEnv = process.env.VERCEL_ENV
 
   let collectionData: string
