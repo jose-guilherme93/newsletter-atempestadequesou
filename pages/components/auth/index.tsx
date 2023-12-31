@@ -1,11 +1,11 @@
+"use client"
 import React, { FormEvent, useEffect, useState } from 'react'
 import Head from 'next/head'
 
-import  {useRouter} from 'next/navigation'
+import  {useRouter} from 'next/router'
 
 import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
-
 
 export default  function Auth() {
     const [email, setEmail] = useState('')

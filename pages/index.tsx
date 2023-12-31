@@ -1,9 +1,7 @@
 import React from "react"
-
 import Head from "next/head"
 
-import MarqueeHorizontal from './components/Marquee'
-
+// import MarqueeHorizontal from './components/Marquee'
 import Form from "./components/Form"
 
 
@@ -21,16 +19,16 @@ export default function Home() {
         <meta name="author" content="A tempestade que sou"/>
       </Head>
 
-      <main className="w-screen md:flex bg-gradient-to-l from-yellow-300 to-blue-600 ">
+      <main className="w-screen h-screen bg-gradient-to-l from-yellow-300 to-blue-600 ">
 
         <Form />
   
-        <div 
+        {/* <div 
           id="secondScreen" 
-          className="overflow-hidden w-screen items-center h-screen">
+          className="items-center w-screen h-screen overflow-hidden">
             
             <MarqueeHorizontal />
-        </div>
+        </div> */}
         
       </main>
     </>

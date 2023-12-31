@@ -21,15 +21,18 @@
     "react-fast-marquee": "^1.6.2",
     "react-hook-form": "^7.48.2",
     "react-icons": "^4.11.0",
-    "react-loader-spinner": "^5.4.5"
+    "react-loader-spinner": "^5.4.5",
+    "react-wrap-balancer": "^1.1.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.6",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "18.11.7",
     "@types/nodemailer": "^6.4.14",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "autoprefixer": "^10.4.16",
+    "daisyui": "^4.4.24",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
     "postcss": "^8.4.31",

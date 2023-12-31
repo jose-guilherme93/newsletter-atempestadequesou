@@ -29,7 +29,7 @@ export default function MarqueeHorizontal() {
                 setIsLoading(false)
             }
         }
-        getAltImageInstagram()
+        // getAltImageInstagram()
     }, [])
 
     if (error) {
