@@ -1,9 +1,32 @@
-import React, { useState } from 'react'
-import Router from 'next/router'
-import axios from 'axios'
-import { useSession, signOut } from 'next-auth/react'
+import React, 
+    { useState } from 'react'
+import Router 
+        from 'next/router'
+import { 
+    useSession, 
+} from 'next-auth/react'
+import axios 
+        from 'axios'
 
 import Loading from '../Loading'
+
+
+
+import { 
+    BtnBold,
+    BtnClearFormatting,
+    BtnItalic,
+    BtnLink,
+    BtnRedo,
+    BtnStyles,
+    BtnUnderline,
+    BtnUndo,
+    ContentEditableEvent,
+    Editor,
+    EditorProvider,
+    Separator,
+    Toolbar
+  } from 'react-simple-wysiwyg';
 
 
 export default function PostToInstagram() {
@@ -12,7 +35,7 @@ export default function PostToInstagram() {
     const [inputTextArea, setInputTextArea] = useState('')
     const [inputTitle, setInputTitle] = useState('')
     
-    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleEditorChange = ( event: ContentEditableEvent) => {
         setInputTextArea(event.target.value)
     }
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,36 +76,59 @@ return (
                         
                     status === 'authenticated' ? (
                         <> 
-                            <form onSubmit={handleSubmit} className='items-center justify-center w-screen h-full'>
-                                <div className='items-center w-full h-screen form-control'>
-                                    <div className='flex flex-col items-center w-1/4 p-4 mt-10'>
-                                        <button onClick={() => signOut()} className='btn btn-warning'>signOut</button>
-                                        <label className='font-sans text-2xl text-zinc-700' htmlFor="post">nova postagem</label>
+                            <form onSubmit={handleSubmit} className='items-center justify-center w-full h-full'>
+                                <div className='flex w-full max-w-3xl p-4 bg-c form-control'>
+                                    <div className='w-1/2 mt-10 '>
+                                        
+                                        <label 
+                                            className='w-full font-sans text-4xl text-zinc-700'
+                                            htmlFor="post">
+                                            nova postagem
+                                        </label>
 
                                     </div>
 
-                                    <section className='items-center w-full m-5 form-control'>
+                                    <section className='w-full my-4 form-control'>
 
-                                        <label className='label-text' htmlFor="title">Título da postagem</label>
-                                        <input onChange={handleTitleChange} type="text" id='title' className='w-1/4 p-4 input input-bordered' name='title' />
+                                        <label 
+                                            className='w-full py-2 text-lg label-text' 
+                                            htmlFor="title">Título da postagem</label>
+                                        <input 
+                                        onChange={handleTitleChange} 
+                                            type="text" 
+                                            id='title' 
+                                            className='p-4 md:w-1/4 input input-bordered' 
+                                            name='title' />
                                     </section>
 
-                                    <textarea
-                                        required
-                                        onChange={handleChange} 
-                                        className='w-full max-w-xs border-primary textarea textarea-bordered textarea-lg' 
-                                        name="nova postagem" 
-                                        id="post" 
-                                        cols={30} 
-                                        maxLength={2200}
-                                        minLength={75}
-                                        rows={15}
-                                        >
-                                    </textarea>
+                                  
+
+                                    <EditorProvider>
+                                        <Editor containerProps={{ 
+                                            style: { 
+                                            width: "100%", 
+                                            height: "50%",
+                                            
+                                            }}}
+                                            onChange={handleEditorChange} 
+                                            value={inputTextArea} >
+                                                
+                                            <Toolbar>
+                                                <BtnBold />
+                                                <BtnItalic />
+                                                <BtnUnderline />
+                                                <BtnUndo />
+                                                <BtnRedo />
+                                                <BtnLink  />
+                                                <BtnClearFormatting />
+                                                <BtnStyles  />
+                                            </Toolbar>
+                                        </Editor>
+                                    </EditorProvider>
 
                                     <button 
-                                        className='mt-5 text-white btn btn-primary' 
-                                        disabled={!inputTextArea} >
+                                        className='w-1/3 mt-5 text-white disabled:btn-disabled btn btn-primary' 
+                                        disabled= {!inputTextArea} >
                                             enviar post
                                     </button>
                                             
