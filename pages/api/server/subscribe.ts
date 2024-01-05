@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   const db = await connectToDatabase(uri)
   const collection = db.collection(collectionData)
 
-  const duplicateEmail = await collection.findOne({ email })
+  const duplicateEmail = await collection.findOne({ email: {$eq:email} })
     if(duplicateEmail?.email !== email) {
 
       await collection.insertOne(
