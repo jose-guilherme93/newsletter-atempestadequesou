@@ -8,6 +8,8 @@ import {
 import axios 
         from 'axios'
 
+import sanitize from 'sanitize-html'
+
 import Loading from '../Loading'
 
 import { 
@@ -29,15 +31,15 @@ import {
 
 export default function PostToInstagram() {
     
-    const {status } = useSession()
+    const {status} = useSession()
     const [inputTextArea, setInputTextArea] = useState('')
     const [inputTitle, setInputTitle] = useState('')
     
     const handleEditorChange = ( event: ContentEditableEvent) => {
-        setInputTextArea(event.target.value)
+        setInputTextArea(sanitize(event.target.value))
     }
     const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputTitle(event.target.value)
+        setInputTitle(sanitize(event.target.value))
     }
     
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -94,7 +96,8 @@ return (
                                             className='w-full py-2 text-lg label-text' 
                                             htmlFor="title">Título da postagem</label>
                                         <input 
-                                        onChange={handleTitleChange} 
+                                        onChange={handleTitleChange}
+                                            required
                                             type="text" 
                                             id='title' 
                                             className='p-4 md:w-1/2 input input-bordered' 
@@ -102,7 +105,6 @@ return (
                                     </section>
 
                                   
-
                                     <EditorProvider>
                                         <Editor containerProps={{ 
                                             style: { 
@@ -121,7 +123,6 @@ return (
                                                 <BtnRedo />
                                                 <BtnLink  />
                                                 <BtnClearFormatting />
-                                                
                                             </Toolbar>
                                         </Editor>
                                     </EditorProvider>
