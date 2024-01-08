@@ -10,8 +10,6 @@ import axios
 
 import Loading from '../Loading'
 
-
-
 import { 
     BtnBold,
     BtnClearFormatting,
@@ -60,6 +58,8 @@ export default function PostToInstagram() {
             })
         }
     }
+
+   
     
 return (
         <>
@@ -97,7 +97,7 @@ return (
                                         onChange={handleTitleChange} 
                                             type="text" 
                                             id='title' 
-                                            className='p-4 md:w-1/4 input input-bordered' 
+                                            className='p-4 md:w-1/2 input input-bordered' 
                                             name='title' />
                                     </section>
 
@@ -121,7 +121,7 @@ return (
                                                 <BtnRedo />
                                                 <BtnLink  />
                                                 <BtnClearFormatting />
-                                                <BtnStyles  />
+                                                
                                             </Toolbar>
                                         </Editor>
                                     </EditorProvider>
@@ -133,6 +133,7 @@ return (
                                     </button>
                                             
                                 </div>
+                                
                             </form>
                         </>
                     )
