@@ -72,7 +72,7 @@ export default function Form() {
                                 @atempestadequesou
                             </Link>
                             </span>
-                            ,{' '}mas se quiser saber mais, <span><Link className= 'underline link-secondary' href={'/components/About'}>clique aqui</Link></span>.
+                            ,{' '}mas se quiser saber mais, <span><Link className= 'underline link-secondary' href={'/components/about'}>clique aqui</Link></span>.
                             </p>
                         </Balancer>
                         

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import axios from 'axios'
 import Marquee from "react-fast-marquee"
-import Loading from "./Loading"
+import Loading from "./loading"
 import { PostsProps } from "../api/DTO"
 
 export default function MarqueeHorizontal() {
