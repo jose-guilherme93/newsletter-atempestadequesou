@@ -5,7 +5,6 @@ import axios from "axios";
 
 import sanitize from "sanitize-html";
 
-import Loading from "../loading";
 
 import {
   BtnBold,
@@ -57,7 +56,7 @@ export default function PostToInstagram() {
     <>
       {status === "loading" ? (
         <div className="flex items-center justify-center w-screen h-screen">
-          <Loading />
+          <p>loading...</p>
         </div>
       ) : status === "authenticated" ? (
         <>

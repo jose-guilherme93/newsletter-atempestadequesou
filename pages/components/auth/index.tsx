@@ -11,7 +11,7 @@ export default  function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const {status} = useSession()
+    const { status } = useSession()
     const route = useRouter()
     
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
