@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   else collectionData = 'subscribers'
   
   const mailpostTitle = req.body.inputTitle
-  const mailPostText =  req.body.inputTextArea.replace(/\n/g,"<br>")
+  const mailPostText =  req.body.inputTextArea
 
   let emails: any = []
   async function getEmails() {
@@ -24,10 +24,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     const cursor = collection.find({});
     await cursor.forEach((doc) => {
       emails.push(doc.email)
-     return emails
-      
     })
-    return emails
   }
 
 getEmails()
