@@ -32,7 +32,7 @@ export default  function Auth() {
 
     useEffect(() => {
         if (status == 'authenticated') {
-            route.replace("/components/auth/PostToMail")
+            route.replace("/components/auth/post-to-mail")
         }
     }, [status])
 
