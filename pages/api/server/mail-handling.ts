@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   }
   else collectionData = 'subscribers'
   
-  const mailpostTitle = req.body.inputTitle
+  const { mailPostTitle } = req.body.inputTitle
   const mailPostText =  req.body.inputTextArea
 
   let emails: any = []
@@ -22,6 +22,7 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
     const db = await connectToDatabase(uri)
     const collection = db.collection(collectionData)
     const cursor = collection.find({});
+
     await cursor.forEach((doc) => {
       emails.push(doc.email)
     })
@@ -36,15 +37,13 @@ getEmails()
     auth: {
     user: process.env.EMAIL,
     pass: process.env.PASSWORD
-
-    
-  }}) 
+  }})
   
    await transporter.sendMail({
       from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
       bcc: emails,
       replyTo: "atempestadequesou@gmail.com",
-      subject: mailpostTitle,
+      subject: mailPostTitle,
       text: mailPostText,
       html: mailPostText
    

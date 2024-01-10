@@ -2,7 +2,7 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import Head from 'next/head'
 
-import  {useRouter} from 'next/router'
+import  { useRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
@@ -11,30 +11,30 @@ export default  function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const {status} = useSession()
+    const { status } = useSession()
     const route = useRouter()
-    useEffect(() => {
-        if (status == 'authenticated') {
-            route.replace("/components/auth/PostToMail")
-        } else if (status == 'unauthenticated') {alert('n autorizado')}
-    }, [status])
-
+    
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
         
     }
-
+    
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value)
     }
-
-
+    
     const handleSubmit = async  (e: FormEvent) => {
         e.preventDefault()
         await signIn('credentials', { redirect: false,
             email: email, password: password
         })
     }
+
+    useEffect(() => {
+        if (status == 'authenticated') {
+            route.replace("/components/auth/post-to-mail")
+        }
+    }, [status])
 
     return (
        <>
