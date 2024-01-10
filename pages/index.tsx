@@ -1,10 +1,6 @@
 import React from "react"
 import Head from "next/head"
-import Form from "./components/form"
-
-// import MarqueeHorizontal from './components/Marquee'
-
-
+import Form from "./components/Form"
 
 export default function Home() {
  

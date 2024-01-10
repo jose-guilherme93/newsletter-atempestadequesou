@@ -3,8 +3,3 @@ export interface PostsProps {
     media_url: string
     permalink: string
 }
-
-export interface EmailProps {
-    
-}
-

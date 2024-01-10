@@ -1,7 +1,6 @@
 "use client"
 import React, { FormEvent, useEffect, useState } from 'react'
 import Head from 'next/head'
-
 import  { useRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
@@ -11,7 +10,7 @@ export default  function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const {status} = useSession()
+    const { status } = useSession()
     const route = useRouter()
     
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
