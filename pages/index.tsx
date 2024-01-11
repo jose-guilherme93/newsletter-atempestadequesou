@@ -1,6 +1,6 @@
 import React from "react"
 import Head from "next/head"
-import Form from "./components/Form"
+import Form from "./components/form/Form"
 
 export default function Home() {
  
@@ -17,16 +17,7 @@ export default function Home() {
       </Head>
 
       <main className="w-screen h-screen bg-gradient-to-l from-yellow-300 to-blue-600 ">
-
-        <Form />
-  
-        {/* <div 
-          id="secondScreen" 
-          className="items-center w-screen h-screen overflow-hidden">
-            
-            <MarqueeHorizontal />
-        </div> */}
-        
+        <Form />      
       </main>
     </>
   )
