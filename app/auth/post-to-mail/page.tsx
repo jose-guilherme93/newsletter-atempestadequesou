@@ -1,10 +1,10 @@
+"use client"
 import React, { useState } from "react";
-import Router from "next/router";
+import {useRouter} from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
 import sanitize from "sanitize-html";
-
 
 import {
   BtnBold,
@@ -20,7 +20,10 @@ import {
   Toolbar,
 } from "react-simple-wysiwyg";
 
+
 export default function PostToInstagram() {
+
+  const route = useRouter()
   const { status } = useSession();
   const [inputTextArea, setInputTextArea] = useState("");
   const [inputTitle, setInputTitle] = useState("");
@@ -41,9 +44,12 @@ export default function PostToInstagram() {
           inputTextArea,
           inputTitle,
         })
+        .then((error) => {
+          console.log(error)
+        })
         .then(() => {
           alert("post enviado");
-          Router.reload();
+          route.replace('/auth/post-to-mail');
         })
 
         .catch((error) => {
@@ -113,7 +119,7 @@ export default function PostToInstagram() {
                   </Toolbar>
                 </Editor>
               </EditorProvider>
-
+                  {inputTextArea}
               <button
                 className="w-1/3 mt-5 text-white disabled:btn-disabled btn btn-primary"
                 disabled={!inputTextArea}
@@ -129,7 +135,7 @@ export default function PostToInstagram() {
           <button
             className="w-32 p-2 font-sans bg-yellow-400 border border-solid rounded-md disabled:bg-yellow-50 text-zinc-900"
             onClick={() => {
-              Router.replace("/components/auth");
+              route.replace("/auth");
             }}
           >
             {" "}

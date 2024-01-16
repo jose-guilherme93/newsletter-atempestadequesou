@@ -1,12 +1,10 @@
-import type { 
-  NextApiRequest, 
-  NextApiResponse } from 'next'
 
 import nodemailer from 'nodemailer'
 
-import connectToDatabase from './connect-to-database'
+import connectToDatabase from '../connect-to-database'
+import { NextRequest, NextResponse } from 'next/server'
 
-export default async function handler(req: NextApiRequest , res: NextApiResponse) {
+export async function POST(req: NextRequest , res: NextResponse) {
 
   const vercelEnv = process.env.VERCEL_ENV
 
@@ -17,8 +15,8 @@ export default async function handler(req: NextApiRequest , res: NextApiResponse
   else collectionData = 'subscribers'
 
   const uri = process.env.MONGODB_URI
-
-  const {email, nome} = req.body
+  const bodyRequestedData = req.json()
+  const {email, nome} = await bodyRequestedData
   
   const db = await connectToDatabase(uri)
   const collection = db.collection(collectionData)
@@ -88,5 +86,5 @@ await transporter.sendMail({
 })
 
 .catch((error) => console.log(error))
-return res.status(201).json({"message": "ok"})
+return NextResponse.json({status:201})
 }

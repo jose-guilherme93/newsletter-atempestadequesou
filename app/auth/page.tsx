@@ -1,16 +1,16 @@
 "use client"
-import React, { FormEvent, useEffect, useState } from 'react'
-import Head from 'next/head'
-import  { useRouter } from 'next/router'
+import React, { FormEvent, 
+                useState } from 'react'
+import  { useRouter } from 'next/navigation'
 
-import { useSession } from 'next-auth/react'
 import { signIn } from 'next-auth/react'
+
+
 
 export default  function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    const { status } = useSession()
+    
     const route = useRouter()
     
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,24 +22,20 @@ export default  function Auth() {
         setPassword(e.target.value)
     }
     
-    const handleSubmit = async  (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         await signIn('credentials', { redirect: false,
             email: email, password: password
         })
+        route.replace('/auth/post-to-mail')
     }
 
-    useEffect(() => {
-        if (status == 'authenticated') {
-            route.replace("/components/auth/post-to-mail")
-        }
-    }, [status])
+    
+  
 
     return (
        <>
-            <Head>
-                <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-            </Head>
+           
              <div className='flex flex-col items-center justify-center w-screen h-screen'>
             <form onSubmit={handleSubmit}  className='flex flex-col gap-2'>
                 <div className='w-full' >

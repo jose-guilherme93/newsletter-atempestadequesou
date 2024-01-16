@@ -1,3 +1,4 @@
+"use client"
 import React, {useState} from 'react'
 import {Balancer} from 'react-wrap-balancer'
 import Image from "next/image"
@@ -20,7 +21,6 @@ export default function Form() {
 
     const [isSend, setIsSend] = useState(false)
     
-
     const onSubmit:  SubmitHandler<UserFormData> = async (data: UserFormData) => {
         setIsSend(true)
         
@@ -71,7 +71,7 @@ export default function Form() {
                                 @atempestadequesou
                             </Link>
                             </span>
-                            ,{' '}mas se quiser saber mais, <span><Link className= 'underline link-secondary' href={'./components/about/About'}>clique aqui</Link></span>.
+                            ,{' '}mas se quiser saber mais, <span><Link className= 'underline link-secondary' href={'/about'}>clique aqui</Link></span>.
                             </p>
                         </Balancer>
                         

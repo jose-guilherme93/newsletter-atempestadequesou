@@ -1,7 +1,7 @@
 
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
+import { NextRequest, NextResponse } from 'next/server'
 
 const options: NextAuthOptions = {
     session: {
@@ -32,11 +32,13 @@ const options: NextAuthOptions = {
     
 ],
 pages: {
-    signIn: '/components/auth',
+    signIn: '/auth/post-to-mail',
     signOut: "/auth/signout",
-    error: "auth/error"
-}
-  
+    error: "auth/error",
 }
 
-export default NextAuth(options)
+}
+
+const handler = NextAuth(options)
+export {handler as GET, handler as POST}
+

@@ -18,5 +18,4 @@ async function connectToDatabase(uri: string) {
 
 }
 
-
 export default connectToDatabase
