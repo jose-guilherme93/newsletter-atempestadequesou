@@ -45,7 +45,7 @@ export default function Form() {
     
     return (
        <section className="flex justify-center w-screen h-full px-4 pt-20 text-white ">
-            <form 
+            <form data-testid="form"
                 className="items-center w-full h-full max-w-lg form-control" 
                 onSubmit={handleSubmit(onSubmit)}
             >
