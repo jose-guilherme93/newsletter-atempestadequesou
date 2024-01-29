@@ -1,23 +1,29 @@
 "use client"
-import React, { useEffect, useState } from "react";
-import {useRouter} from "next/navigation";
+import React, { useState } from "react";
+
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import Modal from "./modal";
 
+export default function PostToMail() {
 
-
-
-
-
-export default function PostToInstagram() {
-
-  const route = useRouter()
   const { status } = useSession();
-  const [inputTextArea, setInputTextArea] = useState("");
-  const [inputTitle, setInputTitle] = useState("");
-  const [confirmModal, setConfirmModal] = useState(false);
 
+  const [wordCount, setWordCount] = useState(0)
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputTextArea, setInputTextArea] = useState("");
+  const [confirmModal, setConfirmModal] = useState(false);
+ 
+  const handleWordsCounter = () => {
+    const words = inputTextArea.split(/\s+/).filter((word) => word !== "")
+    setWordCount(words.length)
+  }
+ 
+  const handleModalOpen = () => {
+    setConfirmModal(true)
+    handleWordsCounter()
+  }
+  
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setInputTitle((event.target.value));
@@ -28,7 +34,6 @@ export default function PostToInstagram() {
     setInputTextArea((event.target.value));
   };
 
-  
   const sendPostToMail = async (confirmModal: boolean) => {
 
     if(confirmModal === true) {
@@ -44,8 +49,9 @@ export default function PostToInstagram() {
       })
       
       .then(() => {
+        
         alert("post enviado");
-        route.replace('/auth/post-to-mail');
+        window.location.reload()
       })
       
       .catch((error) => {
@@ -58,10 +64,8 @@ export default function PostToInstagram() {
     setConfirmModal(false);
   };
 
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
     sendPostToMail(confirmModal)
   };
 
@@ -89,7 +93,7 @@ export default function PostToInstagram() {
 
               <section className="w-full my-4 form-control">
                 <label
-                  className="w-full py-2 text-lg label-text"
+                  className="w-full py-2 text-lg font-medium label-text"
                   htmlFor="title"
                 >
                   Título da postagem
@@ -106,32 +110,32 @@ export default function PostToInstagram() {
               </section>
 
               <textarea
-
                 onChange={handleTextAreaChange}
                 maxLength={2000}
                 minLength={75} 
-                cols={30} 
+                cols={40} 
                 rows={10}
                 required
-                className="font-medium textarea textarea-bordered">
+                className="overflow-visible font-medium text-md textarea textarea-bordered">
                 </textarea>
-              
-              <button 
-                onClick={() => setConfirmModal(true)} 
-                type="button">
-                  abrir modal
+      
+              <button
+                disabled={!inputTextArea || !inputTitle}
+                onClick={handleModalOpen} 
+                type="button"
+                className="my-4 disabled:btn-ghost disabled:opacity-25 disabled:btn-outline btn btn-primary w-fit">
+                  enviar postagem
               </button>
 
               {
-              confirmModal
+              confirmModal &&
               
-                &&
-
-                <Modal
-                confirmModal
-                inputTextArea={inputTextArea} 
-                inputTitle={inputTitle}
-                closeModal={closeModal}/>
+              <Modal
+              confirmModal
+              inputTextArea={inputTextArea} 
+              inputTitle={inputTitle}
+              closeModal={closeModal}
+              wordCount={wordCount}/>
               }
               
             </div>
@@ -140,14 +144,6 @@ export default function PostToInstagram() {
       ) : (
         <div className="flex flex-col items-center justify-center w-screen h-screen">
           <h1>você não está autorizado</h1>
-          <button
-            className="w-32 p-2 font-sans bg-yellow-400 border border-solid rounded-md disabled:bg-yellow-50 text-zinc-900"
-            onClick={() => {
-              route.replace("/auth");
-            }}
-          >
-            {" "} logar
-          </button>
         </div>
       )}
     </>

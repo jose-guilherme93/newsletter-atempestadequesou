@@ -1,25 +1,24 @@
-import { useRouter } from "next/navigation"
+
 interface InputProps {
     inputTextArea: string
     inputTitle: string
     confirmModal: boolean
+    wordCount: number
     closeModal: () => void
-    
 }
 
 
-export default function Modal({inputTextArea, inputTitle, confirmModal, closeModal }:InputProps) {
+export default function Modal({inputTextArea, inputTitle, confirmModal, closeModal, wordCount }:InputProps) {
     
-    const router = useRouter()
+   
     
     const handleModal = () => {
         !confirmModal
     }
 
-
     return (
        
-
+              <div className="bg-zinc-200">
                  <dialog className="modal" onClose={() => closeModal()} open={confirmModal}>
                   <div className="modal-box">
                     
@@ -28,11 +27,13 @@ export default function Modal({inputTextArea, inputTitle, confirmModal, closeMod
                   </form>
                   
                     <h3 className="text-lg font-bold">Hello!</h3>
+                    <p>palavras: {wordCount}</p>
                     <p className="py-4">certeza que deseja enviar?</p>
-                    <button className="btn btn-primary" disabled={!inputTextArea || !inputTitle} type="submit">sim!</button>
+                    <button className="btn btn-primary" disabled={!inputTextArea || !inputTitle} type="submit">enviar</button>
                   </div>
-                  
-              </dialog>
+
+                </dialog>
+              </div>
        
     )
 }
