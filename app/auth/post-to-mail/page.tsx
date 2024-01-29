@@ -13,6 +13,7 @@ export default function PostToMail() {
   const [inputTitle, setInputTitle] = useState("");
   const [inputTextArea, setInputTextArea] = useState("");
   const [confirmModal, setConfirmModal] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true)
  
   const handleWordsCounter = () => {
     const words = inputTextArea.split(/\s+/).filter((word) => word !== "")
@@ -22,8 +23,14 @@ export default function PostToMail() {
   const handleModalOpen = () => {
     setConfirmModal(true)
     handleWordsCounter()
+    handleTime()
   }
   
+  const handleModalClose = () => {
+    setConfirmModal(false);
+    
+    setIsDisabled(true)
+  };
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setInputTitle((event.target.value));
@@ -33,6 +40,12 @@ export default function PostToMail() {
     event.preventDefault()
     setInputTextArea((event.target.value));
   };
+
+  const handleTime = () => {
+    setTimeout(() => {
+       setIsDisabled(!isDisabled)
+     }, 5000);
+ }
 
   const sendPostToMail = async (confirmModal: boolean) => {
 
@@ -60,9 +73,6 @@ export default function PostToMail() {
     }
   }
 
-  const closeModal = () => {
-    setConfirmModal(false);
-  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -112,7 +122,7 @@ export default function PostToMail() {
               <textarea
                 onChange={handleTextAreaChange}
                 maxLength={2000}
-                minLength={75} 
+                
                 cols={40} 
                 rows={10}
                 required
@@ -132,10 +142,11 @@ export default function PostToMail() {
               
               <Modal
               confirmModal
-              inputTextArea={inputTextArea} 
-              inputTitle={inputTitle}
-              closeModal={closeModal}
-              wordCount={wordCount}/>
+              closeModal={handleModalClose}
+              wordCount={wordCount}
+              isDisabled={isDisabled}
+              
+              />
               }
               
             </div>
