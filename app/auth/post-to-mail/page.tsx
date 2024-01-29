@@ -1,24 +1,13 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useRouter} from "next/navigation";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import Modal from "./modal";
 
-import sanitize from "sanitize-html";
 
-import {
-  BtnBold,
-  BtnClearFormatting,
-  BtnItalic,
-  BtnLink,
-  BtnRedo,
-  BtnUnderline,
-  BtnUndo,
-  ContentEditableEvent,
-  Editor,
-  EditorProvider,
-  Toolbar,
-} from "react-simple-wysiwyg";
+
+
 
 
 export default function PostToInstagram() {
@@ -27,35 +16,53 @@ export default function PostToInstagram() {
   const { status } = useSession();
   const [inputTextArea, setInputTextArea] = useState("");
   const [inputTitle, setInputTitle] = useState("");
+  const [confirmModal, setConfirmModal] = useState(false);
 
-  const handleEditorChange = (event: ContentEditableEvent) => {
-    setInputTextArea(sanitize(event.target.value));
-  };
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputTitle(sanitize(event.target.value));
+    event.preventDefault()
+    setInputTitle((event.target.value));
   };
+
+  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    event.preventDefault()
+    setInputTextArea((event.target.value));
+  };
+
+  
+  const sendPostToMail = async (confirmModal: boolean) => {
+
+    if(confirmModal === true) {
+
+      await axios
+      .post("/api/server/mail-handling", {
+        inputTextArea,
+        inputTitle,
+      })
+
+      .then((error) => {
+        console.log(error)
+      })
+      
+      .then(() => {
+        alert("post enviado");
+        route.replace('/auth/post-to-mail');
+      })
+      
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  }
+
+  const closeModal = () => {
+    setConfirmModal(false);
+  };
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const confirmMessage = confirm("enviar postagem?");
-    if (confirmMessage) {
-      await axios
-        .post("/api/server/mail-handling", {
-          inputTextArea,
-          inputTitle,
-        })
-        .then((error) => {
-          console.log(error)
-        })
-        .then(() => {
-          alert("post enviado");
-          route.replace('/auth/post-to-mail');
-        })
-
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    
+    sendPostToMail(confirmModal)
   };
 
   return (
@@ -87,45 +94,46 @@ export default function PostToInstagram() {
                 >
                   Título da postagem
                 </label>
+
                 <input
                   onChange={handleTitleChange}
                   required
                   type="text"
                   id="title"
                   className="p-4 md:w-1/2 input input-bordered"
-                  name="title"
+                  
                 />
               </section>
 
-              <EditorProvider>
-                <Editor
-                  containerProps={{
-                    style: {
-                      width: "100%",
-                      height: "50%",
-                    },
-                  }}
-                  onChange={handleEditorChange}
-                  value={inputTextArea}
-                >
-                  <Toolbar>
-                    <BtnBold />
-                    <BtnItalic />
-                    <BtnUnderline />
-                    <BtnUndo />
-                    <BtnRedo />
-                    <BtnLink />
-                    <BtnClearFormatting />
-                  </Toolbar>
-                </Editor>
-              </EditorProvider>
-                  {inputTextArea}
-              <button
-                className="w-1/3 mt-5 text-white disabled:btn-disabled btn btn-primary"
-                disabled={!inputTextArea}
-              >
-                enviar post
+              <textarea
+
+                onChange={handleTextAreaChange}
+                maxLength={2000}
+                minLength={75} 
+                cols={30} 
+                rows={10}
+                required
+                className="font-medium textarea textarea-bordered">
+                </textarea>
+              
+              <button 
+                onClick={() => setConfirmModal(true)} 
+                type="button">
+                  abrir modal
               </button>
+
+              {
+              confirmModal
+              
+                &&
+
+                <Modal
+                confirmModal
+                inputTextArea={inputTextArea} 
+                inputTitle={inputTitle}
+                closeModal={closeModal}/>
+              }
+              
             </div>
           </form>
         </>
@@ -138,8 +146,7 @@ export default function PostToInstagram() {
               route.replace("/auth");
             }}
           >
-            {" "}
-            logar
+            {" "} logar
           </button>
         </div>
       )}
