@@ -1,61 +1,82 @@
 "use client"
 import React, { useState } from "react";
-import {useRouter} from "next/navigation";
+
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import Modal from "./modal";
 
-import sanitize from "sanitize-html";
+export default function PostToMail() {
 
-import {
-  BtnBold,
-  BtnClearFormatting,
-  BtnItalic,
-  BtnLink,
-  BtnRedo,
-  BtnUnderline,
-  BtnUndo,
-  ContentEditableEvent,
-  Editor,
-  EditorProvider,
-  Toolbar,
-} from "react-simple-wysiwyg";
-
-
-export default function PostToInstagram() {
-
-  const route = useRouter()
   const { status } = useSession();
-  const [inputTextArea, setInputTextArea] = useState("");
-  const [inputTitle, setInputTitle] = useState("");
 
-  const handleEditorChange = (event: ContentEditableEvent) => {
-    setInputTextArea(sanitize(event.target.value));
+  const [wordCount, setWordCount] = useState(0)
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputTextArea, setInputTextArea] = useState("");
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true)
+ 
+  const handleWordsCounter = () => {
+    const words = inputTextArea.split(/\s+/).filter((word) => word !== "")
+    setWordCount(words.length)
+  }
+ 
+  const handleModalOpen = () => {
+    setConfirmModal(true)
+    handleWordsCounter()
+    handleTime()
+  }
+  
+  const handleModalClose = () => {
+    setConfirmModal(false);
+    
+    setIsDisabled(true)
   };
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputTitle(sanitize(event.target.value));
+    event.preventDefault()
+    setInputTitle((event.target.value));
   };
+
+  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    event.preventDefault()
+    setInputTextArea((event.target.value));
+  };
+
+  const handleTime = () => {
+    setTimeout(() => {
+       setIsDisabled(!isDisabled)
+     }, 5000);
+ }
+
+  const sendPostToMail = async (confirmModal: boolean) => {
+
+    if(confirmModal === true) {
+
+      await axios
+      .post("/api/server/mail-handling", {
+        inputTextArea,
+        inputTitle,
+      })
+
+      .then((error) => {
+        console.log(error)
+      })
+      
+      .then(() => {
+        
+        alert("post enviado");
+        window.location.reload()
+      })
+      
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  }
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const confirmMessage = confirm("enviar postagem?");
-    if (confirmMessage) {
-      await axios
-        .post("/api/server/mail-handling", {
-          inputTextArea,
-          inputTitle,
-        })
-        .then((error) => {
-          console.log(error)
-        })
-        .then(() => {
-          alert("post enviado");
-          route.replace('/auth/post-to-mail');
-        })
-
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    sendPostToMail(confirmModal)
   };
 
   return (
@@ -82,65 +103,58 @@ export default function PostToInstagram() {
 
               <section className="w-full my-4 form-control">
                 <label
-                  className="w-full py-2 text-lg label-text"
+                  className="w-full py-2 text-lg font-medium label-text"
                   htmlFor="title"
                 >
                   Título da postagem
                 </label>
+
                 <input
                   onChange={handleTitleChange}
                   required
                   type="text"
                   id="title"
                   className="p-4 md:w-1/2 input input-bordered"
-                  name="title"
+                  
                 />
               </section>
 
-              <EditorProvider>
-                <Editor
-                  containerProps={{
-                    style: {
-                      width: "100%",
-                      height: "50%",
-                    },
-                  }}
-                  onChange={handleEditorChange}
-                  value={inputTextArea}
-                >
-                  <Toolbar>
-                    <BtnBold />
-                    <BtnItalic />
-                    <BtnUnderline />
-                    <BtnUndo />
-                    <BtnRedo />
-                    <BtnLink />
-                    <BtnClearFormatting />
-                  </Toolbar>
-                </Editor>
-              </EditorProvider>
-                  {inputTextArea}
+              <textarea
+                onChange={handleTextAreaChange}
+                maxLength={2000}
+                
+                cols={40} 
+                rows={10}
+                required
+                className="overflow-visible font-medium text-md textarea textarea-bordered">
+                </textarea>
+      
               <button
-                className="w-1/3 mt-5 text-white disabled:btn-disabled btn btn-primary"
-                disabled={!inputTextArea}
-              >
-                enviar post
+                disabled={!inputTextArea || !inputTitle}
+                onClick={handleModalOpen} 
+                type="button"
+                className="my-4 disabled:btn-ghost disabled:opacity-25 disabled:btn-outline btn btn-primary w-fit">
+                  enviar postagem
               </button>
+
+              {
+              confirmModal &&
+              
+              <Modal
+              confirmModal
+              closeModal={handleModalClose}
+              wordCount={wordCount}
+              isDisabled={isDisabled}
+              
+              />
+              }
+              
             </div>
           </form>
         </>
       ) : (
         <div className="flex flex-col items-center justify-center w-screen h-screen">
           <h1>você não está autorizado</h1>
-          <button
-            className="w-32 p-2 font-sans bg-yellow-400 border border-solid rounded-md disabled:bg-yellow-50 text-zinc-900"
-            onClick={() => {
-              route.replace("/auth");
-            }}
-          >
-            {" "}
-            logar
-          </button>
         </div>
       )}
     </>
