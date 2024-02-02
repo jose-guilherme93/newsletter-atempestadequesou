@@ -122,7 +122,6 @@ export default function PostToMail() {
               <textarea
                 onChange={handleTextAreaChange}
                 maxLength={2000}
-                
                 cols={40} 
                 rows={10}
                 required
@@ -141,6 +140,7 @@ export default function PostToMail() {
               confirmModal &&
               
               <Modal
+              inputTextArea={inputTextArea}
               confirmModal
               closeModal={handleModalClose}
               wordCount={wordCount}
