@@ -25,13 +25,13 @@ export default function Modal({
 
   const getQuote = async () => {
     try {
-      const response= await axios.get('https://api.quotable.io/quotes?author=william-shakespeare');
-      setQuote(response.data.results?.[0].content || 'take a time, my storm. always come the sun.');
+      const response= await axios.get('https://api.quotable.io/random/?author=william-shakespeare');
+      setQuote(response.data.content || 'take a time, my storm. the sun always come.');
+      console.log(response.data.content)
     } catch (error) {
       console.error('Erro ao obter citação:', error);
     }
   };
-
   useEffect(() => {
     getQuote();
   }, []); // 
@@ -45,7 +45,7 @@ export default function Modal({
                     <button onClick={handleModal} className="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
                   </form>
                   
-                    <i className="font-thin mb-4 h-full block"><q>{quote}</q></i>
+                    <i className="block h-full mb-4 font-thin">{`${quote}` }</i>
                     <p>palavras: {wordCount}</p>
                     <p>caracteres: {inputTextArea.length}</p>
                     {isDisabled ? " checando o texto..." : inputTextArea.length < 75 ? ' menos de 75 caracteres, enviar mesmo assim?' : ' tudo certo!'}
