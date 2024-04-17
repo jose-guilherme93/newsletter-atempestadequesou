@@ -38,7 +38,7 @@ export default function PostToMail() {
 
   const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault()
-    setInputTextArea((event.target.value));
+    setInputTextArea((event.target.value.replace(/\n/g,"<br>")));
   };
 
   const handleTime = () => {
@@ -49,7 +49,7 @@ export default function PostToMail() {
 
   const sendPostToMail = async (confirmModal: boolean) => {
 
-    if(confirmModal === true) {
+    if(confirmModal) {
 
       await axios
       .post("/api/server/mail-handling", {
@@ -140,12 +140,11 @@ export default function PostToMail() {
               confirmModal &&
               
               <Modal
-              inputTextArea={inputTextArea}
-              confirmModal
-              closeModal={handleModalClose}
-              wordCount={wordCount}
-              isDisabled={isDisabled}
-              
+                inputTextArea={inputTextArea}
+                confirmModal
+                closeModal={handleModalClose}
+                wordCount={wordCount}
+                isDisabled={isDisabled}
               />
               }
               

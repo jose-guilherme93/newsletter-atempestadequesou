@@ -51,7 +51,27 @@ await getEmails()
       replyTo: "atempestadequesou@gmail.com",
       subject: inputTitle,
       text: inputTextArea,
-      html: inputTextArea
+      html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        </head>
+        <body>
+            <style>
+                div {
+                  max-width: 550px;
+                  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                  line-height: normal;
+                  font-weight: 400;
+                  font-size: large;
+                }
+            </style>
+            <div>${inputTextArea}</div>
+        </body>
+        </html>`,
    
    } )
     

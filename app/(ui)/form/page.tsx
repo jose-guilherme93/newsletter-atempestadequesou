@@ -126,18 +126,9 @@ export default function Form() {
                     >
                         <span className='text-lg text-base-100'>
 
-                    {isSend ? '...' : 'enviar'}
+                    {isSend ? 'aguarde...' : 'enviar'}
                         </span>
                     </button>
-                    <span className='text-white'>{isSend ? 'aguarde...' : ''}</span>
-                    
-                    {/* <button  
-                        onClick={() => document.location.href = "#secondScreen"} 
-                        type="button" 
-                        className="mt-4 md:hidden opacity-40"
-                    >
-                        <IoIosArrowDown size={60}/>
-                    </button> */}
                 </section>
             </form>
        </section>
