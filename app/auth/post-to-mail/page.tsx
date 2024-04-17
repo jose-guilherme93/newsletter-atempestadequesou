@@ -36,9 +36,9 @@ export default function PostToMail() {
     setInputTitle((event.target.value));
   };
 
-  const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     event.preventDefault()
-    setInputTextArea((event.target.value));
+    setInputTextArea((event.target.value.replace(/\n/g,"<br>")));
   };
 
   const handleTime = () => {
@@ -53,6 +53,7 @@ export default function PostToMail() {
 
       await axios
       .post("/api/server/mail-handling", {
+        
         inputTextArea,
         inputTitle,
       })
@@ -112,6 +113,7 @@ export default function PostToMail() {
                 <input
                   onChange={handleTitleChange}
                   required
+                  
                   type="text"
                   id="title"
                   className="p-4 md:w-1/2 input input-bordered"
@@ -120,9 +122,9 @@ export default function PostToMail() {
               </section>
 
               <textarea
-                onChange={handleTextAreaChange}
+                onChange={handleInputChange}
                 maxLength={2000}
-                cols={40} 
+                cols={20}
                 rows={10}
                 required
                 className="overflow-visible font-medium text-md textarea textarea-bordered">

@@ -1,5 +1,5 @@
 
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend';
 
 import connectToDatabase, { uri } from '../connect-to-database'
 
@@ -22,6 +22,7 @@ const data = await req.json()
 const {inputTextArea, inputTitle} = await data
 
 
+
 let emails: any = []
 async function getEmails() {
   const db = await connectToDatabase(uri)
@@ -36,28 +37,36 @@ async function getEmails() {
 
 await getEmails()
   
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD
-  }})
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+await resend.emails.send({
   
-   await transporter.sendMail({
-      from: '"a tempestade que sou" <atempestadequesou@gmail.com>', 
-      bcc: emails,
-      replyTo: "atempestadequesou@gmail.com",
-      subject: inputTitle,
-      text: inputTextArea,
-      html: inputTextArea
-   
-   } )
-    
-   .catch((error) => {
-    console.log(error)
-   })
-  return NextResponse.json({status:200})
+  from: 'a tempestadeque sou <newsletter@atempestadequesou.com>',
+  to: emails,
+  bcc: emails,
+  subject: inputTitle,
+  html: `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  </head>
+  <body>
+      <style>
+          div {
+            max-width: 550px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            line-height: normal;
+            font-weight: 400;
+            font-size: large;
+          }
+      </style>
+      <div>${inputTextArea}</div>
+  </body>
+  </html>`,
+} ).catch((error) => console.log(error));
+return NextResponse.json({"status": "ok"})
   }
   

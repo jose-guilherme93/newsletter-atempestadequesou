@@ -24,6 +24,7 @@
     "react-loader-spinner": "^5.4.5",
     "react-simple-wysiwyg": "^3.0.2",
     "react-wrap-balancer": "^1.1.0",
+    "resend": "^3.2.0",
     "sanitize-html": "^2.11.0"
   },
   "devDependencies": {
