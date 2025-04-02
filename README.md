@@ -1,5 +1,4 @@
 # newsletter-atempestadequesou
-www.atempestadequesou.com
 ## NewsLetter da página <a href="https://www.instagram.com/atempestadequesou/">@atempestadequesou<a>
 
 ### Projeto criado com nextjs.
